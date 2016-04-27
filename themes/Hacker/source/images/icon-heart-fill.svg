@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="19px" height="17px" viewBox="0 0 19 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>heart fill</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Icons" sketch:type="MSArtboardGroup" transform="translate(-89.000000, -32.000000)" fill="#757575">
+            <path d="M98.5,49 C98.416,49 98.333,48.979 98.257,48.937 C98.163,48.885 95.931,47.636 93.665,45.59 C92.324,44.38 91.254,43.142 90.482,41.91 C89.498,40.339 89,38.771 89,37.25 C89,34.355 91.355,32 94.25,32 C95.23,32 96.271,32.367 97.181,33.034 C97.713,33.424 98.166,33.894 98.5,34.393 C98.834,33.894 99.287,33.424 99.819,33.034 C100.729,32.367 101.77,32 102.75,32 C105.645,32 108,34.355 108,37.25 C108,38.771 107.501,40.339 106.518,41.91 C105.747,43.142 104.676,44.38 103.336,45.59 C101.07,47.636 98.838,48.885 98.744,48.937 C98.668,48.979 98.585,49 98.501,49 L98.5,49 Z" id="heart-fill" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

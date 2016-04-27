@@ -1,0 +1,331 @@
+* {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    font-family: "微软雅黑","Segoe UI", "Lucida Grande", Helvetica,
+    "Microsoft YaHei", FreeSans, Arimo, "Droid Sans",
+    "wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+
+* {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    -webkit-text-size-adjust: 100%;
+}
+
+::-moz-selection {
+    color: #000;
+    background-color: #9baec8;/*f79292*/
+}
+
+::selection {
+    color: #000;
+    background-color: #9baec8;/*f79292*/
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 1rem 0;
+    font-weight: bolder;
+    font-size: 100%;
+    line-height: 1.2;
+    font-family: "微软雅黑","Segoe UI", "Lucida Grande", Helvetica,
+    "Microsoft YaHei","Open Sans", "Lato", "Helvetica Neue", "Arial", serif;
+}
+
+h1 + *,
+h2 + *,
+h3 + *,
+h4 + *,
+h5 + *,
+h6 + * {
+    margin-top: 1rem !important;
+}
+
+* + h1,
+* + h2,
+* + h3,
+* + h4,
+* + h5,
+* + h6 {
+    margin-top: 3rem;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h3 {
+    font-size: 1.15em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+ul,
+ol {
+    padding-left: 2em;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin: .5em 0 1em 0;
+}
+
+dt {
+    font-weight: bolder;
+}
+
+dt + dd {
+    margin-top: .5em;
+}
+
+dd {
+    margin-left: 0;
+}
+
+dd + dt {
+    margin-top: 1em;
+}
+
+hr {
+    display: block;
+    padding: 0;
+    border: 0;
+    height: 0;
+    border-top: 1px solid #E0E0E0;
+    /* 1 */
+    box-sizing: content-box;
+    /* 1 */
+}
+
+
+table {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+table caption {
+    padding: 5px;
+    color: #333;
+    background-color: #e5e5e5;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: .6em;
+    vertical-align: top;
+    border-top: 1px solid #e5e5e5;
+}
+
+table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+table tbody + tbody {
+    border-top: 2px solid #e5e5e5;
+}
+
+table .table {
+    background-color: #fff;
+}
+
+.table-bordered {
+    border: 1px solid #e5e5e5;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+
+img {
+    vertical-align: bottom;
+}
+
+figure {
+    margin: 0;
+}
+
+textarea {
+    vertical-align: top;
+    resize: vertical;
+}
+
+a {
+    color: #2b90d9;
+    text-decoration: none;
+}
+
+a[href="#"], a.is-disabled {
+    color: #999;
+}
+
+a:hover {
+    color: #116098;/*e41111*/
+}
+
+em {
+    font-style: normal;
+}
+
+strong {
+    font-weight: bold;
+}
+
+
+pre {
+    border-radius: 3px;
+}
+
+code {
+    padding: 2px 4px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #c7254e;
+    white-space: nowrap;
+    border-radius: 0;
+}
+
+pre {
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+ins,
+mark {
+    background: #ffa;
+    color: #333;
+}
+
+abbr,
+dfn {
+    font-style: normal;
+    border-bottom: 1px dotted;
+}
+
+small {
+    font-size: 80%;
+}
+
+address {
+    font-style: normal;
+}
+
+blockquote {
+    margin: 6rem 2rem;
+    padding-left: 15px;
+    line-height: 1.4;
+    border-left: 4px solid #2b90d9;
+}
+
+blockquote p {
+    margin: 0 0 .7em 0;
+}
+
+blockquote small,
+blockquote cite {
+    display: block;
+    font-size: 80%;
+    color: #616161;
+    margin-top: .5em;
+}
+
+blockquote cite:before {
+    content: '- ';
+}
+
+blockquote p:last-of-type {
+    margin-bottom: 0;
+}
+
+iframe {
+    border: 0;
+}
+
+/*----------------------------------------------------------------------*/
+/* #Layout
+/*----------------------------------------------------------------------*/
+#page {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#primary {
+    max-width: 770px;
+    width: 100%;
+    padding: 80px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/*默认颜色#f7f7f7*/
+body {
+    background-color: #d9e1e8;
+}
+
+body #page {
+    max-width: 1170px;
+    background-color: #d9e1e8;/*fff*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+body {
+    font-family: "微软雅黑","Open Sans", "Lato", "Helvetica Neue", "Arial", serif;
+    font-size: 1.6rem;
+    color: #282c37;/*424242*/
+    line-height: 1.8;
+    background-color: #d9e1e8;/*fff*/
+    overflow-x: hidden;
+}
+
+#tagcloud{position:relative; margin:0px auto;}
+#tagcloud a{position:absolute;top:0px;left:0px;color:#2b90d9;font-weight:bold;}
+#tagcloud a:hover{background:#116098;}

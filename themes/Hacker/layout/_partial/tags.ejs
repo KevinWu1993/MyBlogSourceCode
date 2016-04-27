@@ -1,0 +1,28 @@
+<%
+var title = '标签';
+%>
+
+<div class="archive article">
+
+<h3 class="archive-title"><%= title %></h3>
+ <div id="tagcloud">
+<!--循环开始-->
+ <% site.tags.each(function(item){ %>
+<article class="<%= item.layout %> article">
+        <div class="post-content">
+          <header>
+            
+              <h4 class="acticle-tilte-h4"><a href="<%- config.root %><%- item.path %>"><span><%= item.name %></span></a></h4>       
+          </header>
+        </div>
+      </article>
+    <!--循环结束-->
+<% }); %>
+</div>
+
+
+  
+</div>
+
+
+

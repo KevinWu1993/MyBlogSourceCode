@@ -1,0 +1,26 @@
+/*----------------------------------------------------------------------*/
+/* ##Archive
+---------------------------------*/
+.archive-header {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+.archive-header .archive-title {
+    font-size: 1.8em;
+    line-height: 1;
+}
+
+.archive-header .archive-title:before {
+    content: '#';
+}
+
+.archive-header .taxonomy-description {
+    font-size: 1em;
+    color: #9e9e9e;
+    margin: 0;
+}
+
+.archive-header .taxonomy-description p {
+    margin: 0;
+}

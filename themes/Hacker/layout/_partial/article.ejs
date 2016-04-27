@@ -1,0 +1,55 @@
+<article class="<%= item.layout %> article">
+
+  <%- partial('post/title') %>
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="<%- config.root %><%- item.path %>" rel="bookmark">
+        <time class="entry-date published" datetime="<%= item.date.toDate().toISOString() %>">
+          <%= item.date.format(config.date_format) %>
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  <% if (item.photos && item.photos.length){ %>
+    <%- partial('post/gallery') %>
+  <% } %>
+
+  <div class="article-content">
+    <div class="entry">
+      <% if (item.excerpt && index){ %>
+        <%- item.excerpt %>
+      <% } else { %>
+        <%- item.content %>
+      <% } %>
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            <%- partial('post/category') %>
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            <%- partial('post/tag') %>
+          </span>
+        </div>
+        <% if (index && theme.duoshuo){ %>
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="<%- item.permalink %>#comment"><%- __('comment') %></a>
+            </span>
+          </span>
+        </div>
+        <% } %>
+    </footer>
+  </div>
+</article>
+<% if (!index){ %>
+  <%- partial('comment') %>
+<% } %>

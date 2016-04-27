@@ -1,0 +1,41 @@
+@media (max-width: 768px) {
+    #primary {
+        padding-top: 20px;
+    }
+    .Article {
+        padding: 2.5rem 0;
+    }
+    .Article__excerpt {
+        margin: 2rem 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .Extendfull__inner {
+        -webkit-transform: translateX(-10px);
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+}
+/*----------------------------------------------------------------------*/
+/* #Responsive
+/*----------------------------------------------------------------------*/
+@media (max-width: 768px) {
+    #primary {
+        padding-top: 20px;
+    }
+    .Article {
+        padding: 4rem 0;
+    }
+    .Article__excerpt {
+        margin: 3rem 0;
+    }
+}
+
+@media (max-width: 770px) {
+    .Extendfull__inner {
+        -webkit-transform: translateX(-10px);
+        -ms-transform: translateX(-10px);
+        transform: translateX(-10px);
+    }
+}

@@ -1,0 +1,13 @@
+<% if (item.link){ %>
+  <% if (item.title){ %>
+    <h3 class="article-title"><a href="<%- item.link %>" target="_blank"><span><%= item.title %></span></a></h3>
+  <% } else { %>
+    <h3 class="article-title"><a href="<%- item.link %>" target="_blank"><span><%= item.link %></span></a></h3>
+  <% } %>
+<% } else { %>
+  <% if (index){ %>
+    <h3 class="article-title"><a href="<%- config.root %><%- item.path %>"><span><%= item.title %></span></a></h3>
+  <% } else { %>
+    <h3 class="article-title"><span><%= item.title %></span></h3>
+  <% } %>
+<% } %>

@@ -1,0 +1,62 @@
+<%
+var title = '分类';
+%>
+
+<div class="archive article">
+
+<h3 class="archive-title"><%= title %></h3>
+  
+
+
+
+<% if (pagination == 2){ %>
+  <% site.categories.each(function(item){ %>
+    <%- partial('article', {item: item, index: true}) %>
+  <% }); %>
+  <%- partial('pagination') %>
+<% } else { %>
+<div class="archive">
+<!--循环开始-->
+ <% site.categories.each(function(item){ %>
+        <div class="post-content">
+          <header>
+              
+              <h4 class="categories-tilte-h4"><a href="<%- config.root %><%- item.path %>"><span><div class="icon-categories-center"></div><%= item.name %></span></a></h4>       
+          </header>
+        </div>
+    <!--循环结束-->
+<% }); %>
+<%- partial('pagination') %>
+</div>
+</div>
+<% } %>
+<!-- 多说公共JS代码 
+
+<% if (theme.duoshuo){ %>
+<div id="comment">
+<!--
+最近访客
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+-->
+ <div class="ds-thread" data-thread-key="<%- config.root %>
+<%- site.categories.path%>" data-title="<% 'categories' %>" 
+data-url="<% 'http://kevinwu1993.github.io/categories/' %>"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"<%- theme.duoshuo_name %>"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+
+
+</div>
+<% } %> -->
+
+
+<br><br><br><br><br><br><br><br><br><br>
+

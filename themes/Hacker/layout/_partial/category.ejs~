@@ -1,0 +1,11 @@
+<section class="layout-wrap">
+  <div class="archive article">
+    <span><%= page.title %></span>
+  
+  <div class="archive">
+<div class="post-content">
+    <% if(site.categories.length) { %>
+      <%- list_categories(site.categories,{show_count: false}) %>
+    <% } %>
+  </div></div></div>
+</section>

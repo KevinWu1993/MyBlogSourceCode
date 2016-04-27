@@ -1,0 +1,7 @@
+<div class="featured-media">
+  <% if (item.photos.length){ %>
+    <img src="<%- item.photos[0] %>" class="attachment-post-thumbnail size-post-thumbnail">
+  <% } else { %>
+    <img src="<%- item.photos %>" class="attachment-post-thumbnail size-post-thumbnail">
+  <% } %>
+</div>

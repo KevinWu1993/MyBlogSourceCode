@@ -1,0 +1,65 @@
+<!--确定标题-->
+<%
+var title = '';
+if (page.category) title = page.category;
+if (page.tag) title = page.tag;
+if (page.archive){
+  if (page.year) title = page.year + (page.month ? '/' + page.month : '');
+  else title = __('archive_a');
+}
+%>
+
+<div class="archive article">
+
+<h3 class="archive-title<% if (page.tag){ %> tag<% } else if (page.category){ %> category<% } %>"><%= title %></h3>
+
+<% if (pagination == 2){ %>
+  <% page.posts.each(function(item){ %>
+    <%- partial('article', {item: item, index: true}) %>
+  <% }); %>
+  <%- partial('pagination') %>
+<% } else { %>
+  <div class="archive">
+    <% page.posts.each(function(item){ %>
+      <div class="acticle-tilte-h4time"><%= item.date.format(config.date_format) %></div>
+      <!--<article class="<%= item.layout %> article">-->
+        <div class="post-content">
+          <header>
+            <div class="icon">
+	    </div>
+            <% if (item.link){ %>
+              <% if (item.title){ %>
+                <h4 class="acticle-tilte-h4">
+		<a href="<%- item.link %>" target="_blank">
+			<span>
+				<%= item.title %>
+			</span>
+		</a>
+		</h4>
+              <% } else { %>
+                <h4 class="acticle-tilte-h4">
+		<a href="<%- item.link %>" target="_blank">
+			<span>
+				<%= item.link %>
+			</span>
+		</a>
+		</h4>
+              <% } %>
+            <% } else { %>
+              <h4 class="acticle-tilte-h4">
+		<a href="<%- config.root %><%- item.path %>">
+			<span>
+				<%= item.title %>
+			</span>
+		</a>
+	      </h4>
+            <% } %>
+          </header>
+        </div>
+     <!-- </article>-->
+    <% }); %>
+    <%- partial('pagination') %>
+  </div>
+
+</div>
+<% } %>

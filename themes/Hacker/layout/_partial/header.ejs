@@ -1,0 +1,13 @@
+<div class="site-branding">
+  <h1 class="site-title">
+    <a href="<%- config.root %>"><%= config.title %></a>
+  </h1>
+  <p class="site-description"><% if (config.subtitle){ %><%= config.subtitle %><% } %></p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    <% for (var i in theme.menu){ %>
+      <li><a href="<%- theme.menu[i] %>"><%= __(i) %></a></li>
+    <% } %>
+  </ul>
+</nav>

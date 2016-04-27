@@ -1,0 +1,17 @@
+menu:
+  Home: /  
+  Archives: /archives
+  Categories: /categories
+  Tags: /tags
+  About: /about
+  #GitHub: https://github.com/KevinWu1993
+  Links: /link
+  RSS: /atom.xml
+
+# duoshuo comment
+duoshuo: true
+duoshuo_name: kevinwu1993
+
+# google analytics
+# googleTrackId: 
+
