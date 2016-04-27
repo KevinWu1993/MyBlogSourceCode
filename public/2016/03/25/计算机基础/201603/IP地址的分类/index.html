@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IP地址的分类 | Kevin Wu&#39;s Blog | 慢几步，深几度</title>
+  <meta name="author" content="Kevin Wu">
+  
+  <meta name="description" content="KevinWu的个人博客">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="IP地址的分类"/>
+  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Kevin Wu&#39;s Blog</a>
+  </h1>
+  <p class="site-description">慢几步，深几度</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/categories">分类</a></li>
+    
+      <li><a href="/about">我</a></li>
+    
+      <li><a href="/tags">标签</a></li>
+    
+      <li><a href="/link">链接</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>IP地址的分类</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/25/计算机基础/201603/IP地址的分类/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-24T16:00:00.000Z">
+          2016-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>根据不同特征的IP地址，对网络号所占的位数和主机号所占的位数进行分类，分为A、B、C、D、E五类地址。</p>
+<h1 id="A类地址"><a href="#A类地址" class="headerlink" title="A类地址"></a>A类地址</h1><p>A类地址的范围是1.0.0.0~126.255.255.255，高位以0开头，全球共有2^7-2个A类网络，每个A类网络有2^24-2个主机地址。127开头的地址保留为本地回环地址。<br><a id="more"></a></p>
+<h1 id="B类地址"><a href="#B类地址" class="headerlink" title="B类地址"></a>B类地址</h1><p>B类地址的范围是128.0.0.0~191.255.255.255，高位以10开头，全球共有2^14个B类网络，每个B类网络共有2^16-2个主机地址。</p>
+<h1 id="C类地址"><a href="#C类地址" class="headerlink" title="C类地址"></a>C类地址</h1><p>C类地址的范围是192.0.0.0~223.255.255.255，高位以110开头，全球共有2^21个C类网络，每个C类网络共有2^8-2个主机地址。</p>
+<h1 id="D类地址"><a href="#D类地址" class="headerlink" title="D类地址"></a>D类地址</h1><p>D类地址的范围是224.0.0.0~239.255.255.255，高位以1110开头。</p>
+<h1 id="E类地址"><a href="#E类地址" class="headerlink" title="E类地址"></a>E类地址</h1><p>E类地址的高位以11110开头，作为保留今后使用的地址。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="特殊的IP地址"><a href="#特殊的IP地址" class="headerlink" title="特殊的IP地址"></a>特殊的IP地址</h2><h3 id="网络地址"><a href="#网络地址" class="headerlink" title="网络地址"></a>网络地址</h3><p>主机号全0的地址</p>
+<h3 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h3><p>主机号全1的地址，表示特定网络的广播</p>
+<h3 id="本地链路广播地址"><a href="#本地链路广播地址" class="headerlink" title="本地链路广播地址"></a>本地链路广播地址</h3><p>255.255.255.2.。表示本机所在的网络广播</p>
+<h3 id="内网地址"><a href="#内网地址" class="headerlink" title="内网地址"></a>内网地址</h3><p>保留给任何一个公司单位内部网络使用的IP地址，不能出现在公网上，范围是：</p>
+<ul>
+<li>10.0.0.0~10.255.255.255</li>
+<li>172.16.0.0~172.31.255.255</li>
+<li>192.168.0.0~192.168.255.255</li>
+</ul>
+<h3 id="链路本地地址"><a href="#链路本地地址" class="headerlink" title="链路本地地址"></a>链路本地地址</h3><p>无IP地址分配是由操作系统临时分配的IP地址，范围为：169.254.0.0~169.254.255.255</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/计算机基础/">计算机基础</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/基础知识/">基础知识</a>, <a href="/tags/计算机网络/">计算机网络</a>, <a href="/tags/总结/">总结</a>
+
+
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+<div id="comment">
+<!--
+最近访客
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+-->
+<!-- 多说评论框 start -->
+ <div class="ds-thread" data-thread-key="/
+2016/03/25/计算机基础/201603/IP地址的分类/" data-title="IP地址的分类" 
+data-url="http://KevinWu1993.github.io/2016/03/25/计算机基础/201603/IP地址的分类/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kevinwu1993"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
+  <p class="meta">
+    </br>
+    
+    &copy; 2016 Kevin Wu
+    
+  </p>
+</div>
+</footer>
+    <!---->
+  </div>
+</div>
+</body>
+</html>

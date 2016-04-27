@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java集合类总结 | Kevin Wu&#39;s Blog | 慢几步，深几度</title>
+  <meta name="author" content="Kevin Wu">
+  
+  <meta name="description" content="KevinWu的个人博客">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Java集合类总结"/>
+  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Kevin Wu&#39;s Blog</a>
+  </h1>
+  <p class="site-description">慢几步，深几度</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/categories">分类</a></li>
+    
+      <li><a href="/about">我</a></li>
+    
+      <li><a href="/tags">标签</a></li>
+    
+      <li><a href="/link">链接</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Java集合类总结</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/15/Java/201603/Java集合类总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-14T16:00:00.000Z">
+          2016-03-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <blockquote>
+<p>这篇文章是对java集合类的个人总结</p>
+</blockquote>
+<a id="more"></a>
+<p>﻿</p>
+<p> 先来看看java集合类中的框架结构：</p>
+<ul>
+<li><p>java.util.Collection[interface]</p>
+<ul>
+<li><p>java.util.List[interface]</p>
+<ul>
+<li><p>java.util.ArrayList[class]</p>
+</li>
+<li><p>java.util.LinkedList[class]</p>
+</li>
+<li><p>java.util.Vector[class]</p>
+<ul>
+<li>java.util.Stack[class]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>java.util.set[interface]</p>
+<ul>
+<li><p>java.util.HashSet[class]</p>
+</li>
+<li><p>java.util.SortedSet[interface]</p>
+<ul>
+<li>java.util.TreeSet[class]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>java.util.Map[interface]</p>
+<ul>
+<li><p>java.util.SortedMap[interface]</p>
+<ul>
+<li>java.util.TreeMap[class]</li>
+</ul>
+</li>
+<li><p>java.util.Hashtable[class]</p>
+</li>
+<li><p>java.util.HashMap[class]</p>
+<ul>
+<li><p>java.util.LinkedHashMap[class]</p>
+</li>
+<li><p>java.util.WeakHashMap[class]</p>
+</li>
+</ul>
+</li>
+<li><p>ConcurrentHashMap[class]</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h1><p>Collection是最基本的集合类接口，一个Collection代表一组Object，即Collection的元素。一些Collection支持相同的元素，而一些不支持，一些支持排序，java不提供直接继承Collection的类，只提供了继承自Collection的子接口的接口入List和Set。</p>
+<p>所有集合类都实现了Iterator接口，这是一个遍历集合中的元素的接口，主要包含hasNext()、next()、和remove()三种方法。它的子接口LinkedIterator还在它的基础上加了三种方法：add()、previous()、hasPrevious()。所以只实现了Iterator接口的类，只能往后遍历，被遍历过的元素不会再被遍历到，一般无序的集合都实现了这个接口。而有序的集合一般都实现了LinkedIterator接口，这样可以实现双向遍历，如ArrayList，既可以用next()访问下一个元素，又可以用previous()访问前一个元素。</p>
+<p>需要注意一点是，如果要自己去实现一个集合类，就可以实用java定义好的抽象类，这些抽象类已经为我们提供了许多实现，我们只需要根据需求重写一些方法或添加一些方法就行。</p>
+<p>根据用途的不同，Collection划分为List和Set。</p>
+<h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><p>List是继承自Collection的接口。它是有序的，使用这个接口可以精准地控制每个元素插入的位置。可以使用index索引值来访问List中的元素。跟Set不同，List允许有重复的元素。</p>
+<p>除了具备Collection接口的Iterator()方法外，List还提供了一个listIterator()方法，返回的是一个ListIterator接口，这个接口与标准Iterator接口相比，多了一些add()之类的方法，允许添加，删除，设定元素，还可以向前，向后遍历。</p>
+<p>实现了List接口的常用类有LinkedList，ArrayList，Vector和Stack。</p>
+<h3 id="LinkedList类"><a href="#LinkedList类" class="headerlink" title="LinkedList类"></a>LinkedList类</h3><p>LinkedList类实现了List接口，允许插入null元素。可以把它看成双向链表，可以使用LinkedList实现栈（stack）、队列（queue）或双向队列（deque）。</p>
+<p>需要注意的是LinkedList没有同步的方法，如果需要在多个线程中访问LinkedList，就需要注意线程同步的问题，或者在创建List时构造一个同步的List，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Object&gt; list=Collections.synchronizedList(<span class="keyword">new</span> LinkedList&lt;&gt;());</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayList类"><a href="#ArrayList类" class="headerlink" title="ArrayList类"></a>ArrayList类</h3><p>ArrayList可以理解为动态数组。它允许所有的元素，包括null值的元素。ArrayList的初始大小为10，当容量不足时，就会设置成原来的容量的1.5倍加1的新容量，一般确定元素数量的情况下使用ArrayList，否则应该使用LinkedList，因为当容量不足时，都要将原来的元素复制到一个新的数组中，这个操作非常耗时。</p>
+<p>同样，ArrayList类也不是同步的，需要注意线程同步问题。</p>
+<h3 id="Vector类"><a href="#Vector类" class="headerlink" title="Vector类"></a>Vector类</h3><p>Vector类与ArrayList类非常相似，默认值也是10，当容量不足时，如果制定了incr参数，则增加incr个容量，否则直接在原来容量的基础上加倍。</p>
+<p>Vector和ArrayList有别的还有一点，就是Vector是线程同步的。</p>
+<p>所以，当一个Iterator被创建且正在被使用时，另一个线程试图改变Vector的元素值时，就会抛出ConcurrentModificationException异常。</p>
+<h4 id="Stack类"><a href="#Stack类" class="headerlink" title="Stack类"></a>Stack类</h4><p>Stack类继承自Vector类，也就是说Vector有的方法它都有，而且在这基础上，实现了先进后出的栈。它提供了5个额外的方法使得一个Vector可以当做堆栈使用，5个方法如下：</p>
+<ul>
+<li><p>push 进栈</p>
+</li>
+<li><p>pop 出栈</p>
+</li>
+<li><p>peek 得到栈顶的元素</p>
+</li>
+<li><p>empty 测试栈是否为空</p>
+</li>
+<li><p>search 检测一个元素在堆栈中的位置</p>
+</li>
+</ul>
+<h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><p>Set和List一样是继承自Collection接口，但与List不同的是，Set是一种不可以包含重复元素的集合。Set类最多只允许有一个null值（有两个null值不就重复了么？～～）。</p>
+<h3 id="HashSet类"><a href="#HashSet类" class="headerlink" title="HashSet类"></a>HashSet类</h3><p>这个类实现了Set接口，它底层是基于HashMap实现的，HashSet的底层使用HashMap来保存所有的元素，在Set里面用的只是Map的key，在HashSet里面判断两个元素是否相等，是通过hasCode()和equal()两个方法共同完成的，如果集合的对象中没有重写者两个方法，就会使用object继承来的方法，即比较地址。</p>
+<h3 id="SortedSet接口"><a href="#SortedSet接口" class="headerlink" title="SortedSet接口"></a>SortedSet接口</h3><p>SortedSet接口里面的元素一定是有序的。这里的有序不是指插入顺序，而是指根据对象的比较顺序。</p>
+<p>对于SortedSet这个接口，目前java仅有一个具体实现的类——TreeSet。</p>
+<h4 id="TreeSet类"><a href="#TreeSet类" class="headerlink" title="TreeSet类"></a>TreeSet类</h4><p>TreeSet类实现Set接口，它是依靠TreeMap实现的，对于TreeSet，需要注意以下几点：</p>
+<ul>
+<li><p>TreeSet存储对象的时候，可以排序，但是需要指定排序算法。</p>
+</li>
+<li><p>Integer可以有默认顺序，String有默认顺序，但是如果是自定义类型，则会出现异常（因为没有默认顺序）</p>
+</li>
+<li><p>如果想把自定义类型存入TreeSet进行排序，那么就需要对该类型实现Comparable接口并重写compareTo()方法，这样在调用add()方法往TreeSet对象添加元素时就会自动调用比较的方法，根据比较的结果使用二叉树的形式存储。</p>
+</li>
+</ul>
+<h2 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h2><p>Map接口没有继承Collection接口。也就是说Map和Collection是两种不同类型的集合。Collection可以看做是value（值）的集合，而Map可以看做是key,value（键值对）的集合。</p>
+<p>Map有3种集合视图，分别为一组key集合、一组value集合或者一组key-value映射。</p>
+<h3 id="SortedMap接口"><a href="#SortedMap接口" class="headerlink" title="SortedMap接口"></a>SortedMap接口</h3><p>保证按照键的升序排列的映射，可以按照键的自然顺序进行排序，或者通过创建有序映射时提供的比较器进行排序。</p>
+<p>这个接口的一个比较常用的实现类是TreeMap。</p>
+<h4 id="TreeMap类"><a href="#TreeMap类" class="headerlink" title="TreeMap类"></a>TreeMap类</h4><p>TreeMap类是SortedMap接口的一个具体实现，这个类保证了映射按照升序排序关键字，基于红黑树（自平衡二叉查找树）。根据构造方法的不同，可能按照键值的自然顺序排序，或者按照创建时所提供的比较器进行排序。这个类也是不允许重复值的，和HashMap一样，如果插入重复的元素，后面的元素就会覆盖掉前面的。它的键key不可以为null，但是值可以为null。</p>
+<h3 id="Hashtable类"><a href="#Hashtable类" class="headerlink" title="Hashtable类"></a>Hashtable类</h3><p>Hashtable是Map接口的一个具体实现，实现了一个key-value映射的哈希表。Hashtable的key和value都不允许为空。</p>
+<p>添加数据时使用put(key,value)，获取一个数据时使用get(key)。</p>
+<p>默认容量大小为11，每次扩容，都是将容量变成原来的2倍加1。</p>
+<p>Hashtable通过initial capacity和load factor两个参数来调整性能。默认的load factor 0.75较好地实现了时间和空间的均衡。增大load factor可以节省空间但相应的查找时间将会增大，会影响get和put等操作。</p>
+<p>Hashtable是线程同步的。</p>
+<h3 id="HashMap类"><a href="#HashMap类" class="headerlink" title="HashMap类"></a>HashMap类</h3><p>HashMap也实现了一个key-value映射的哈希表，存储结构和冲突解决与hashtable一致，但HashMap是允许null值的，即key和value的值都允许为null，其中key为null的键值对永远存放在以table[0]为头节点的链表中，当然不一定是存放在头节点table[0]中。</p>
+<p>HashMap的默认大小为16，无论设定容量为多少，构造方法都会将实际容量设为不小于指定容量的2的次方的一个数，这样是为了让hash发生碰撞的概率较小，使元素在哈希表中均匀地散列，且这个数的最大值不能超过2的30次方。</p>
+<p>每次加入键值对时，都要判断当前已用的槽的数目是否大于等于【容量*load factor】(load factor默认0.75)，如果大于或等于，就进行扩容，每次扩容，容量都编程原来的两倍。</p>
+<h5 id="补充：Hashtable和HashMap的区别"><a href="#补充：Hashtable和HashMap的区别" class="headerlink" title="补充：Hashtable和HashMap的区别"></a>补充：Hashtable和HashMap的区别</h5><p>它们的主要区别在于：线程安全性、同步以及速度</p>
+<ol>
+<li><p>HashMap几乎可以等价于Hashtable，除了HashMap是非synchronized的和允许空值null。</p>
+</li>
+<li><p>HashMap是非synchronized的，而Hashtable是synchronized的，这意味者Hashtable是线程安全的，多线程可以共享一个Hashtable，如果没有使用同步，多线程不能共享HashMap。</p>
+</li>
+<li><p>另一个区别是HashMap的迭代器Iterator是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素）时将会抛出ConcurrentModificationException异常。</p>
+</li>
+<li><p>由于Hashtable是线程安全的，所以在单线程情况下要比HashMap要慢。</p>
+</li>
+<li><p>HashMap不能保证随着时间的推移Map中的元素次序是不变的。</p>
+</li>
+</ol>
+<h4 id="LinkedHashMap类"><a href="#LinkedHashMap类" class="headerlink" title="LinkedHashMap类"></a>LinkedHashMap类</h4><p>LinkedHashMap类是HashMap和LinkedList的结合，它的父类是HashMap。它额外定义了一个head为头节点的空的双向循环链表，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的，就是说与键值对的插入顺序保持一致。因为要维护插入顺序，所以性能要低于HashMap，但是在迭代访问元素时会有很好的性能，因为它以链表维护内部顺序。</p>
+<h4 id="WeakHashMap类"><a href="#WeakHashMap类" class="headerlink" title="WeakHashMap类"></a>WeakHashMap类</h4><p>WeakHashMap的用法基本与HashMap相同，区别在于HashMap的key保留对象的强引用，即只要HashMap对象不被销毁，其对象所有key所引用的对象不会被垃圾回收，HashMap也不会自动删除这些key所对应的键值对象。但WeakHashMap的key所引用的对象没有被其他强引用的变量所引用，则这些key所引用的对象可能被回收。WeakHashMap中的每个key对象保存了实际对象的弱引用，当回收了该key所对应的实际对象后，WeakHashMap会自动删除该key对应的键值对。</p>
+<h3 id="ConcurrentHashMap类"><a href="#ConcurrentHashMap类" class="headerlink" title="ConcurrentHashMap类"></a>ConcurrentHashMap类</h3><p>ConcurrentHashMap最重要的是引入了Segment的概念，他在自己内部定义了这个Class来管理数据，这个Segment类似与HashMap的定义，ConcurrentHashMap会将对应的读写操作交给Segment。</p>
+<p>ConcurrentHashMap默认将Map分成16个Segment，分段锁，有16个写线程执行写，而读的大部分时候都不需要用到锁。只有在size等操作时才需要锁住整个哈希表。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Java/">Java</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/集合/">集合</a>
+
+
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+<div id="comment">
+<!--
+最近访客
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+-->
+<!-- 多说评论框 start -->
+ <div class="ds-thread" data-thread-key="/
+2016/03/15/Java/201603/Java集合类总结/" data-title="Java集合类总结" 
+data-url="http://KevinWu1993.github.io/2016/03/15/Java/201603/Java集合类总结/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kevinwu1993"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
+  <p class="meta">
+    </br>
+    
+    &copy; 2016 Kevin Wu
+    
+  </p>
+</div>
+</footer>
+    <!---->
+  </div>
+</div>
+</body>
+</html>

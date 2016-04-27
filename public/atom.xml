@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kevin Wu&#39;s Blog</title>
+  <subtitle>慢几步，深几度</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://KevinWu1993.github.io/"/>
+  <updated>2016-03-26T13:36:25.000Z</updated>
+  <id>http://KevinWu1993.github.io/</id>
+  
+  <author>
+    <name>Kevin Wu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二维数组中的查找——解题及多次优化思路分析</title>
+    <link href="http://KevinWu1993.github.io/2016/03/26/%E5%9C%A8%E7%BA%BF%E5%88%B7%E9%A2%98/201603/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%E2%80%94%E2%80%94%E8%A7%A3%E9%A2%98%E5%8F%8A%E5%A4%9A%E6%AC%A1%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/"/>
+    <id>http://KevinWu1993.github.io/2016/03/26/在线刷题/201603/二维数组中的查找——解题及多次优化思路分析/</id>
+    <published>2016-03-26T12:01:24.000Z</published>
+    <updated>2016-03-26T13:36:25.000Z</updated>
+    
+    <content type="html">&lt;p&gt;来自《剑指Offer》的一道题。&lt;/p&gt;
+&lt;h2 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h2&gt;&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 &lt;/p&gt;
+&lt;h3 id=&quot;输入描述&quot;&gt;&lt;a href=&quot;#输入描述&quot; class=&quot;headerlink&quot; title=&quot;输入描述:&quot;&gt;&lt;/a&gt;输入描述:&lt;/h3&gt;&lt;p&gt;array： 待查找的二维数组&lt;br&gt;target：查找的数字&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;输出描述&quot;&gt;&lt;a href=&quot;#输出描述&quot; class=&quot;headerlink&quot; title=&quot;输出描述:&quot;&gt;&lt;/a&gt;输出描述:&lt;/h3&gt;&lt;p&gt;查找到返回true，查找不到返回false&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;第一次写的代码&quot;&gt;&lt;a href=&quot;#第一次写的代码&quot; class=&quot;headerlink&quot; title=&quot;第一次写的代码&quot;&gt;&lt;/a&gt;第一次写的代码&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Solution&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Find&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; [][] array,&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;i&amp;lt;array.length;i++)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j=array[i].length-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;j&amp;gt;=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&amp;amp;&amp;amp;array[i][j]&amp;gt;=target;j--)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[i][j]==target)&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;思路分析：&quot;&gt;&lt;a href=&quot;#思路分析：&quot; class=&quot;headerlink&quot; title=&quot;思路分析：&quot;&gt;&lt;/a&gt;思路分析：&lt;/h2&gt;&lt;p&gt;因为是二维数组，而且是每一行从左到有递增的，所以可以先从大的找起，即每行的最右边，所以逐行遍历下来，比较最右边的元素，比查找的target大则说明在那一行里面，再往回遍历那一行，遍历到就返回true，否则遍历完后没遍历到就返回false。&lt;br&gt;由于用了两个循环，所以。。。&lt;br&gt;在线编译后结果是：运行时间： 183 ms 占用内存：5075K&lt;br&gt;虽然AC了，但是时空非常不可观，于是，优化下看看。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;第二次写的代码&quot;&gt;&lt;a href=&quot;#第二次写的代码&quot; class=&quot;headerlink&quot; title=&quot;第二次写的代码&quot;&gt;&lt;/a&gt;第二次写的代码&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Solution&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Find&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; [][] array,&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array.length==&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; divBig=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i=array.length-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;i&amp;gt;=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;i--)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[i].length&amp;gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[i][array[i].length-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]&amp;gt;=target)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j=array[i].length-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;j&amp;gt;=divBig;j--)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[i][j]==target)&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[i][j]&amp;lt;target)divBig=j;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;思路分析：-1&quot;&gt;&lt;a href=&quot;#思路分析：-1&quot; class=&quot;headerlink&quot; title=&quot;思路分析：&quot;&gt;&lt;/a&gt;思路分析：&lt;/h2&gt;&lt;p&gt;这次换了一种方式，先从右下角找起，也是逐行遍历，不过这次利用了题目说的这句话&lt;strong&gt;每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。&lt;/strong&gt; 优化了一下行遍历，因为列也是递增的，如果往回搜索找到列上元素比目标元素还小时，就说明在当前列的上面所有行对应的列对应的元素肯定比目标元素小，以后就不用继续遍历那些行对应的前面的列了，这样优化一下，果然时间快了一点点，不过也就一点点啊。&lt;br&gt;因为还是用了两个循环，时间为O（n^2）量级。&lt;br&gt;编译结果：运行时间： 126 ms 占用内存：5019K&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;第三次写的代码：&quot;&gt;&lt;a href=&quot;#第三次写的代码：&quot; class=&quot;headerlink&quot; title=&quot;第三次写的代码：&quot;&gt;&lt;/a&gt;第三次写的代码：&lt;/h3&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Solution&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Find&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; [][] array,&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; target)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; col=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//列&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; row=array.length-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;&lt;span class=&quot;comment&quot;&gt;//行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;(row&amp;gt;=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&amp;amp;&amp;amp;col&amp;lt;array[row].length)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[row][col]&amp;gt;target)row--;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(array[row][col]==target)&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; col++;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这次沿用了上面的思想，但是从左下角找起，换用了一层循环，速度。。。&lt;br&gt;貌似快了1ms。。而已。&lt;br&gt;编译结果：运行时间： 125 ms 占用内存：5145K&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;来自《剑指Offer》的一道题。&lt;/p&gt;
+&lt;h2 id=&quot;题目描述：&quot;&gt;&lt;a href=&quot;#题目描述：&quot; class=&quot;headerlink&quot; title=&quot;题目描述：&quot;&gt;&lt;/a&gt;题目描述：&lt;/h2&gt;&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 &lt;/p&gt;
+&lt;h3 id=&quot;输入描述&quot;&gt;&lt;a href=&quot;#输入描述&quot; class=&quot;headerlink&quot; title=&quot;输入描述:&quot;&gt;&lt;/a&gt;输入描述:&lt;/h3&gt;&lt;p&gt;array： 待查找的二维数组&lt;br&gt;target：查找的数字&lt;br&gt;
+    
+    </summary>
+    
+      <category term="在线刷题" scheme="http://KevinWu1993.github.io/categories/%E5%9C%A8%E7%BA%BF%E5%88%B7%E9%A2%98/"/>
+    
+    
+      <category term="查找" scheme="http://KevinWu1993.github.io/tags/%E6%9F%A5%E6%89%BE/"/>
+    
+      <category term="二维数组" scheme="http://KevinWu1993.github.io/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IP地址的分类</title>
+    <link href="http://KevinWu1993.github.io/2016/03/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/201603/IP%E5%9C%B0%E5%9D%80%E7%9A%84%E5%88%86%E7%B1%BB/"/>
+    <id>http://KevinWu1993.github.io/2016/03/25/计算机基础/201603/IP地址的分类/</id>
+    <published>2016-03-24T16:00:00.000Z</published>
+    <updated>2016-03-26T12:05:12.000Z</updated>
+    
+    <content type="html">&lt;p&gt;根据不同特征的IP地址，对网络号所占的位数和主机号所占的位数进行分类，分为A、B、C、D、E五类地址。&lt;/p&gt;
+&lt;h1 id=&quot;A类地址&quot;&gt;&lt;a href=&quot;#A类地址&quot; class=&quot;headerlink&quot; title=&quot;A类地址&quot;&gt;&lt;/a&gt;A类地址&lt;/h1&gt;&lt;p&gt;A类地址的范围是1.0.0.0~126.255.255.255，高位以0开头，全球共有2^7-2个A类网络，每个A类网络有2^24-2个主机地址。127开头的地址保留为本地回环地址。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;B类地址&quot;&gt;&lt;a href=&quot;#B类地址&quot; class=&quot;headerlink&quot; title=&quot;B类地址&quot;&gt;&lt;/a&gt;B类地址&lt;/h1&gt;&lt;p&gt;B类地址的范围是128.0.0.0~191.255.255.255，高位以10开头，全球共有2^14个B类网络，每个B类网络共有2^16-2个主机地址。&lt;/p&gt;
+&lt;h1 id=&quot;C类地址&quot;&gt;&lt;a href=&quot;#C类地址&quot; class=&quot;headerlink&quot; title=&quot;C类地址&quot;&gt;&lt;/a&gt;C类地址&lt;/h1&gt;&lt;p&gt;C类地址的范围是192.0.0.0~223.255.255.255，高位以110开头，全球共有2^21个C类网络，每个C类网络共有2^8-2个主机地址。&lt;/p&gt;
+&lt;h1 id=&quot;D类地址&quot;&gt;&lt;a href=&quot;#D类地址&quot; class=&quot;headerlink&quot; title=&quot;D类地址&quot;&gt;&lt;/a&gt;D类地址&lt;/h1&gt;&lt;p&gt;D类地址的范围是224.0.0.0~239.255.255.255，高位以1110开头。&lt;/p&gt;
+&lt;h1 id=&quot;E类地址&quot;&gt;&lt;a href=&quot;#E类地址&quot; class=&quot;headerlink&quot; title=&quot;E类地址&quot;&gt;&lt;/a&gt;E类地址&lt;/h1&gt;&lt;p&gt;E类地址的高位以11110开头，作为保留今后使用的地址。&lt;/p&gt;
+&lt;h1 id=&quot;补充&quot;&gt;&lt;a href=&quot;#补充&quot; class=&quot;headerlink&quot; title=&quot;补充&quot;&gt;&lt;/a&gt;补充&lt;/h1&gt;&lt;h2 id=&quot;特殊的IP地址&quot;&gt;&lt;a href=&quot;#特殊的IP地址&quot; class=&quot;headerlink&quot; title=&quot;特殊的IP地址&quot;&gt;&lt;/a&gt;特殊的IP地址&lt;/h2&gt;&lt;h3 id=&quot;网络地址&quot;&gt;&lt;a href=&quot;#网络地址&quot; class=&quot;headerlink&quot; title=&quot;网络地址&quot;&gt;&lt;/a&gt;网络地址&lt;/h3&gt;&lt;p&gt;主机号全0的地址&lt;/p&gt;
+&lt;h3 id=&quot;广播地址&quot;&gt;&lt;a href=&quot;#广播地址&quot; class=&quot;headerlink&quot; title=&quot;广播地址&quot;&gt;&lt;/a&gt;广播地址&lt;/h3&gt;&lt;p&gt;主机号全1的地址，表示特定网络的广播&lt;/p&gt;
+&lt;h3 id=&quot;本地链路广播地址&quot;&gt;&lt;a href=&quot;#本地链路广播地址&quot; class=&quot;headerlink&quot; title=&quot;本地链路广播地址&quot;&gt;&lt;/a&gt;本地链路广播地址&lt;/h3&gt;&lt;p&gt;255.255.255.2.。表示本机所在的网络广播&lt;/p&gt;
+&lt;h3 id=&quot;内网地址&quot;&gt;&lt;a href=&quot;#内网地址&quot; class=&quot;headerlink&quot; title=&quot;内网地址&quot;&gt;&lt;/a&gt;内网地址&lt;/h3&gt;&lt;p&gt;保留给任何一个公司单位内部网络使用的IP地址，不能出现在公网上，范围是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;10.0.0.0~10.255.255.255&lt;/li&gt;
+&lt;li&gt;172.16.0.0~172.31.255.255&lt;/li&gt;
+&lt;li&gt;192.168.0.0~192.168.255.255&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;链路本地地址&quot;&gt;&lt;a href=&quot;#链路本地地址&quot; class=&quot;headerlink&quot; title=&quot;链路本地地址&quot;&gt;&lt;/a&gt;链路本地地址&lt;/h3&gt;&lt;p&gt;无IP地址分配是由操作系统临时分配的IP地址，范围为：169.254.0.0~169.254.255.255&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;根据不同特征的IP地址，对网络号所占的位数和主机号所占的位数进行分类，分为A、B、C、D、E五类地址。&lt;/p&gt;
+&lt;h1 id=&quot;A类地址&quot;&gt;&lt;a href=&quot;#A类地址&quot; class=&quot;headerlink&quot; title=&quot;A类地址&quot;&gt;&lt;/a&gt;A类地址&lt;/h1&gt;&lt;p&gt;A类地址的范围是1.0.0.0~126.255.255.255，高位以0开头，全球共有2^7-2个A类网络，每个A类网络有2^24-2个主机地址。127开头的地址保留为本地回环地址。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="http://KevinWu1993.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="基础知识" scheme="http://KevinWu1993.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="计算机网络" scheme="http://KevinWu1993.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="总结" scheme="http://KevinWu1993.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单工、半双工和全双工微总结</title>
+    <link href="http://KevinWu1993.github.io/2016/03/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/201603/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E5%92%8C%E5%85%A8%E5%8F%8C%E5%B7%A5%E5%BE%AE%E6%80%BB%E7%BB%93/"/>
+    <id>http://KevinWu1993.github.io/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/</id>
+    <published>2016-03-24T16:00:00.000Z</published>
+    <updated>2016-03-26T12:05:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
+&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
+&lt;h1 id=&quot;半双工&quot;&gt;&lt;a href=&quot;#半双工&quot; class=&quot;headerlink&quot; title=&quot;半双工&quot;&gt;&lt;/a&gt;半双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，但不能同时进行，当A在发送消息时，B只能接受，反之一样。&lt;/p&gt;
+&lt;h1 id=&quot;全双工&quot;&gt;&lt;a href=&quot;#全双工&quot; class=&quot;headerlink&quot; title=&quot;全双工&quot;&gt;&lt;/a&gt;全双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，两者能同时进行。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
+&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
+&lt;h1 id=
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="http://KevinWu1993.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="基础知识" scheme="http://KevinWu1993.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="计算机网络" scheme="http://KevinWu1993.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="总结" scheme="http://KevinWu1993.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android四大组件之一——Activity</title>
+    <link href="http://KevinWu1993.github.io/2016/03/22/Android/201603/%20Android%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6%E4%B9%8B%E4%B8%80%E2%80%94%E2%80%94Activity/"/>
+    <id>http://KevinWu1993.github.io/2016/03/22/Android/201603/ Android四大组件之一——Activity/</id>
+    <published>2016-03-21T16:00:00.000Z</published>
+    <updated>2016-03-21T16:25:18.000Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;Activity是Android的四大组件之一，这里将梳理一下有关Activity的东西&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Activity的四种状态&quot;&gt;&lt;a href=&quot;#Activity的四种状态&quot; class=&quot;headerlink&quot; title=&quot;Activity的四种状态&quot;&gt;&lt;/a&gt;Activity的四种状态&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Active状态：&lt;/strong&gt;在这种状态的Activity，必须是在栈顶的，此时它是可视的，并且可以获取焦点和用户的输入，Android系统将会保证在这种状态的Activity有充分的资源，当资源不足时就会试图杀死其它Activity来提供足够的资源，当激活另一个Activity后，当前Active状态的Activity将会进入Paused状态。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;strong&gt;Paused状态：&lt;/strong&gt;当一个透明或者非全屏的Activity被激活时，前一个处于Active状态的Activity将会进入Paused状态，处于这种状态的Activity依然处于活动状态，只是不再能获取焦点和用户输入，如果当前被激活的Activity的资源足够的情况下，Android不会主动杀死处于Paused状态的Activity，当一个Activity变得完全不可见时，它将会进入Stoped状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stoped状态：&lt;/strong&gt;当一个Activity变得完全不可见，就代表它此时进入了Stoped状态。虽然此时该Activity被停止了，但内存中仍保存这这个Activity的所有信息，但当Android出现内存资源不足时，处于这种状态的Activity是最有可能被杀死的。当一个Activity退出或关闭了，就会进入Killed状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Killed状态：&lt;/strong&gt;当一个Activity被退出了或者关闭了，就进入了这种状态，处于这种状态的Activity，在需要时可以重新启用它。&lt;/p&gt;
+&lt;h2 id=&quot;Activity生命周期&quot;&gt;&lt;a href=&quot;#Activity生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity生命周期&quot;&gt;&lt;/a&gt;Activity生命周期&lt;/h2&gt;&lt;p&gt;&lt;em&gt;了解一个组件，生命周期这个一定要了解，才能更好地把握在什么时候该做什么事。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;说到生命周期，必然少不了这张图：&lt;/p&gt;
+&lt;h4 id=&quot;简单说明一下这张图：&quot;&gt;&lt;a href=&quot;#简单说明一下这张图：&quot; class=&quot;headerlink&quot; title=&quot;简单说明一下这张图：&quot;&gt;&lt;/a&gt;简单说明一下这张图：&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;http://i12.tietuku.cn/2bf48e46914376f0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;当一个Activity启动后，系统会先调用Activity中的onCreate()方法，这个方法也是见得最多的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行完onCreate()方法后，系统会依次调用onStart()、onResume()方法，调用完这个方法后，一个Activity就算正式启动完成了，此时Activity显示在前台，也就是处于前面所说的四种状态中的Active状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当另一个Activity被激活，并占据前台时，当前处于Active状态的Activity将执行onPause()状态，此时也就是前面所说的四种状态中的Paused状态。此时如果系统资源不足，需要资源，很可能处于这个状态的Activity将被杀死，就进入了Killed状态，又或者，处于这个状态的Activity又重新回到前台，那么将重新调用onResume()方法，Activity将重新进入前台显示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当一个Activity不再可见后，即执行该Activity的onStop()方法，执行该方法说明该Activity进入了前面四种状态中的Stoped状态，此时也跟Paused状态一样，有两种可能，只是这里在回到前台后，执行的不是onResume()方法，而是先执行onRestart()方法。然后执行onStart()方法，再执行onResume()方法。（我个人把这个理解为重新启动的过程，不知道这么理解有没有问题）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当用户退出Activity后，如果处于任何状态的Activity都会按照图示顺序执行下来，执行onStop()方法后，就会执行onDestory()方法，执行完onDestory()方法后，这个Activity将被正式关闭了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;下面引用网上对这几种方法的介绍，来说明下这几种方法：&quot;&gt;&lt;a href=&quot;#下面引用网上对这几种方法的介绍，来说明下这几种方法：&quot; class=&quot;headerlink&quot; title=&quot;下面引用网上对这几种方法的介绍，来说明下这几种方法：&quot;&gt;&lt;/a&gt;下面引用网上对这几种方法的介绍，来说明下这几种方法：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;onCreate：当Activity第一次启动的时候，触发这个方法，可以在此时完成Activity的初始化工作。onCreate方法有一个参数，这个参数可以为空，也可以是之前调用onSaveInstanceState()方法保存的状态信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onStart：该方法的触发表示所属活动将被展现给用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onResume：当一个活动和用户发生交互时，就会触发该方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onPause：当一个正在前台运行的活动因为其他活动需要前台运行而转入后台运行的时候，触发该方法。这时候需要将活动的状态持久化，比如正在编辑的数据库记录等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onStop：当一个活动不需要展示给用户的时候，就会触发该方法。如果内存紧张，系统会直接结束这个活动，而不会触发onStop方法。所以保存状态信息是应该在onPause时做，而不是onStop时候做。活动如果没有在前台运行，都将被停止或者Linux管理进程为了给新的活动预留足够的存储空间而随时结束这些活动，因此对于开发者来说，在设计应用程序的时候，必须时刻牢记这一原则。在一些情况下，onPause方法或许是活动触发的最后的方法，因此开发者需要在这个时候保存需要保存的信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onRestart：当处于停止状态的活动需要再次展现给用户的时候，触发该方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onDestory：当活动销毁的时候，触发该方法。和onStop方法一样，如果内存紧张，系统会直接结束这个活动而不会触发这个方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;onSaveInstanceState：&lt;/strong&gt;系统调用该方法，允许活动保存之前的状态，比如说在一串字符串中的光标所处的位置等。&lt;/p&gt;
+&lt;p&gt;通常情况下，开发者不需要重写覆盖该方法，在默认实现中，已经提供了自动保存活动所设计的用户界面组件的所有状态信息。&lt;/p&gt;
+&lt;h2 id=&quot;Activity的四种加载模式&quot;&gt;&lt;a href=&quot;#Activity的四种加载模式&quot; class=&quot;headerlink&quot; title=&quot;Activity的四种加载模式&quot;&gt;&lt;/a&gt;Activity的四种加载模式&lt;/h2&gt;&lt;p&gt;Activity提供了四种加载模式，分别为：standard、singleTop、singleTask、singleInstance模式。&lt;/p&gt;
+&lt;p&gt;这四种模式都是在AndroidManifest.xml文件中通过android:lanchMode来指定的，在介绍这四种启动模式之前，有必要先来了解一个概念——&lt;strong&gt;Activity栈&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Activity栈&quot;&gt;&lt;a href=&quot;#Activity栈&quot; class=&quot;headerlink&quot; title=&quot;Activity栈&quot;&gt;&lt;/a&gt;Activity栈&lt;/h3&gt;&lt;p&gt;Android是通过栈来保存Activity的，栈底的元素就是整个任务的发起者。&lt;/p&gt;
+&lt;p&gt;当一个应用启动时，如果当前没有该应用的任务栈，就会创建一个任务栈，有了任务栈后，这个应用所启动的Activity都将在这个任务栈中被管理。&lt;/p&gt;
+&lt;p&gt;有一点需要注意的，一个任务栈中Activity可能来自不同应用，同一个应用的Activity也可能不再一个任务栈中。&lt;/p&gt;
+&lt;p&gt;一般情况下，当一个任务栈中的一个Activity启动了另一个Activity的时候，新启动的Activity就会进入任务栈顶端，并处于Active状态，而启动它的Activity就被顶下去一个位置，处于Stoped状态（不可见的情况下），当当前Activity执行完后，即用户按下返回键或者调用了finish()方法后，当前Activity出栈，启动它的Activity就宠幸回到Active状态。&lt;/p&gt;
+&lt;p&gt;这就是基于栈的后进先出的任务栈。&lt;/p&gt;
+&lt;h3 id=&quot;standard模式&quot;&gt;&lt;a href=&quot;#standard模式&quot; class=&quot;headerlink&quot; title=&quot;standard模式&quot;&gt;&lt;/a&gt;standard模式&lt;/h3&gt;&lt;p&gt;这是默认的加载模式，这种加载模式每次都会创建一个新的Activity，每创建一次，新的Activity就会覆盖在原有的Activity上。&lt;/p&gt;
+&lt;h3 id=&quot;singleTop模式&quot;&gt;&lt;a href=&quot;#singleTop模式&quot; class=&quot;headerlink&quot; title=&quot;singleTop模式&quot;&gt;&lt;/a&gt;singleTop模式&lt;/h3&gt;&lt;p&gt;我个人理解就相当与栈顶单实例模式，设置了这种模式的Activity，在启动时会先判断该Activity是否处于栈顶，如果处于栈顶就不会新建Activity实例，而是直接重新启动在栈顶的这个Activity，并调用onNewIntent()方法。&lt;/p&gt;
+&lt;h3 id=&quot;singleTask模式&quot;&gt;&lt;a href=&quot;#singleTask模式&quot; class=&quot;headerlink&quot; title=&quot;singleTask模式&quot;&gt;&lt;/a&gt;singleTask模式&lt;/h3&gt;&lt;p&gt;singleTask模式和singleTop模式类似，不过与singleTop检测栈顶元素是否是需要启动的Activity不同的是，singleTask是检测整个Activity栈中是否存在需要启动的Activity，如果存在，就把该Activity顶到栈顶，在该Activity上的Activity都会出栈销毁。&lt;/p&gt;
+&lt;p&gt;上面是对处于同一个应用中启动的singleTask模式的Activity的处理。&lt;/p&gt;
+&lt;p&gt;对于在其他应用中启动singleTask模式的Activity，如果后台任务栈不存在要启动的Activity，那么将会创建一个新的任务栈，如果后台任务栈中存在要启动的Activity，该后台任务栈就会切换到前台。&lt;/p&gt;
+&lt;h3 id=&quot;singleInstance&quot;&gt;&lt;a href=&quot;#singleInstance&quot; class=&quot;headerlink&quot; title=&quot;singleInstance&quot;&gt;&lt;/a&gt;singleInstance&lt;/h3&gt;&lt;p&gt;singleInstance可以简单理解为singleTask的加强版，这个加载模式具备singleTask的所有特性，但在任务栈的处理上加强了，处于这种模式的Activity，每一个Activity都会单独处于一个任务栈中，而且那个任务栈中智能存在单个Activity。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Activity是Android的四大组件之一，这里将梳理一下有关Activity的东西&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Activity的四种状态&quot;&gt;&lt;a href=&quot;#Activity的四种状态&quot; class=&quot;headerlink&quot; title=&quot;Activity的四种状态&quot;&gt;&lt;/a&gt;Activity的四种状态&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Active状态：&lt;/strong&gt;在这种状态的Activity，必须是在栈顶的，此时它是可视的，并且可以获取焦点和用户的输入，Android系统将会保证在这种状态的Activity有充分的资源，当资源不足时就会试图杀死其它Activity来提供足够的资源，当激活另一个Activity后，当前Active状态的Activity将会进入Paused状态。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://KevinWu1993.github.io/categories/Android/"/>
+    
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/tags/Java/"/>
+    
+      <category term="Android - 加载模式" scheme="http://KevinWu1993.github.io/tags/Android-%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="Activity" scheme="http://KevinWu1993.github.io/tags/Activity/"/>
+    
+      <category term="启动模式" scheme="http://KevinWu1993.github.io/tags/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM简单个人总结（一）</title>
+    <link href="http://KevinWu1993.github.io/2016/03/16/Java/201603/JVM%E7%AE%80%E5%8D%95%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://KevinWu1993.github.io/2016/03/16/Java/201603/JVM简单个人总结（一）/</id>
+    <published>2016-03-15T16:00:00.000Z</published>
+    <updated>2016-03-18T07:24:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;说明：这篇文章只是个人对JVM的初步探讨总结，很多概念来自网络，加入部分个人理解，也许个人理解的地方有误，也恳请看到的同学帮忙指出，关于JVM的具体知识可以阅读《深入理解Java虚拟机：JVM高级特性与最佳性能》这本书籍。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;JVM&quot;&gt;&lt;a href=&quot;#JVM&quot; class=&quot;headerlink&quot; title=&quot;JVM&quot;&gt;&lt;/a&gt;JVM&lt;/h1&gt;&lt;p&gt;JVM是Java Virtual Machine的缩写，中文名为java虚拟机，JVM是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。它与VirtualBox那些虚拟PC机的虚拟机又有点区别，它只设置了4个常用的寄存器，分别为：pc程序计数器，optop操作数寄存器，frame当前执行环境指针和vars当前执行环境中的第一个局部变量指针。&lt;/p&gt;
+&lt;p&gt;java语言的一个非常重要的特点是平台无关性，而使用java虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入java虚拟机后，java语言在不同平台上运行时就不需要重新编译。Java实用java虚拟机屏蔽了与具体平台的信息，使得java语言编译程序只需生成java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。java虚拟机在执行字节码时，把字节码翻译成具体平台上的机器指令执行。这就是java能够“一次编译，到处运行”的原因。&lt;/p&gt;
+&lt;h1 id=&quot;JRE-JDK-JVM的关系&quot;&gt;&lt;a href=&quot;#JRE-JDK-JVM的关系&quot; class=&quot;headerlink&quot; title=&quot;JRE/JDK/JVM的关系&quot;&gt;&lt;/a&gt;JRE/JDK/JVM的关系&lt;/h1&gt;&lt;p&gt;JRE（Java Runtime Environment）：中文名为java运行是环境，也就是java平台。所有的java程序都要在有jre的环境下才能运行。&lt;/p&gt;
+&lt;p&gt;JDK（Java Development Kit）：中文名为java开发工具，jdk的工具也是java程序，也需要jre环境才能运行。&lt;/p&gt;
+&lt;p&gt;JVM（Java Virtual Machine）：中文名为java虚拟机，这个是jre的一部分。&lt;/p&gt;
+&lt;h1 id=&quot;JVM环境的加载&quot;&gt;&lt;a href=&quot;#JVM环境的加载&quot; class=&quot;headerlink&quot; title=&quot;JVM环境的加载&quot;&gt;&lt;/a&gt;JVM环境的加载&lt;/h1&gt;&lt;p&gt;以windows操作系统为例，装入JVM是通过jdk中的Java.exe可执行程序来完成的，具体可以分为四步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;创建JVM装载环境和配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;装载JVM.dll&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;初始化JVM.dll并挂到JNIENV（JNI调用接口）实例&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;调用JNIENV实例装载并处理class类&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;关于这个更详细的信息可以参考这篇文章：&lt;a href=&quot;http://blog.csdn.net/ye1992/article/details/38228393&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.csdn.net/ye1992/article/details/38228393&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;JVM的生命周期&quot;&gt;&lt;a href=&quot;#JVM的生命周期&quot; class=&quot;headerlink&quot; title=&quot;JVM的生命周期&quot;&gt;&lt;/a&gt;JVM的生命周期&lt;/h1&gt;&lt;p&gt;当一个Java程序启动时，一个JVM实例就产生了，任何存在public static void main(String [] args)方法的类都可以作为JVM实例运行的起点，所以在平时定义一个Class时就要显示告诉JVM类名，这样JVM才能知道是该运行哪个类里面的main方法。&lt;/p&gt;
+&lt;p&gt;main()方法是初始线程的起点，任何其它线程均由该线程启动。JVM内部存在两种线程，分别为守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，Java程序也可以标明自己创建的线程是守护线程。&lt;/p&gt;
+&lt;p&gt;当程序中的所有非守护线程都终止时，JVM才退出，程序中也可以使用setDaemon(boolean on)方法来设定为守护线程。（Linux中说守护进程，这里为什么说守护线程呢？因为，java是跑在JVM虚拟机上的）。&lt;/p&gt;
+&lt;h1 id=&quot;JVM体系结构&quot;&gt;&lt;a href=&quot;#JVM体系结构&quot; class=&quot;headerlink&quot; title=&quot;JVM体系结构&quot;&gt;&lt;/a&gt;JVM体系结构&lt;/h1&gt;&lt;p&gt;JVM内部分成三部分，分别为：类装载器（ClassLoader）子系统、执行引擎和运行时数据区。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;类装载器子系统：就是用来装载.class文件的系统。JVM的两种装载器包括：启动类装载器和用户自定义类装载器。启动类装载器是JVM实现的一部分，用户自定义类装载器则是java程序的一部分，必须是ClassLoader类的子类。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行引擎：执行引擎是Java虚拟机核心组成部分之一，输入的是字节码文件，处理过程就是字节码解析的等效过程，输出的是执行结果，对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法。执行引擎所运行的所有字节码指令都是针对当前栈帧进行操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行时数据区：主要有方法区、堆、Java栈、PC寄存器、本地方法栈。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;对运行时数据区进行些补充：&quot;&gt;&lt;a href=&quot;#对运行时数据区进行些补充：&quot; class=&quot;headerlink&quot; title=&quot;对运行时数据区进行些补充：&quot;&gt;&lt;/a&gt;对运行时数据区进行些补充：&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;方法区和堆由所有线程共享&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Java栈和PC寄存器由线程独享，在新线程的创建的时间里&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;本地方法栈：存储本地方法调用的状态&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;JVM中的数据类型：&quot;&gt;&lt;a href=&quot;#JVM中的数据类型：&quot; class=&quot;headerlink&quot; title=&quot;JVM中的数据类型：&quot;&gt;&lt;/a&gt;JVM中的数据类型：&lt;/h2&gt;&lt;p&gt;JVM中的基本数据单元是word，而word的长度由JVM的具体实现者来决定。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;数据类型包括基本类型和引用类型：&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;基本数据类型包括：数值类型（除boolean外的所有java基本数据类型），boolean在JVM中使用int来表示，0表示false，其他值均表示true，还有一个returnAddress类型，这个是JVM的内部类型，用来实现finally子句。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;引用类型包括：数组类型、类类型、接口类型&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说明：这篇文章只是个人对JVM的初步探讨总结，很多概念来自网络，加入部分个人理解，也许个人理解的地方有误，也恳请看到的同学帮忙指出，关于JVM的具体知识可以阅读《深入理解Java虚拟机：JVM高级特性与最佳性能》这本书籍。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/tags/Java/"/>
+    
+      <category term="JVM" scheme="http://KevinWu1993.github.io/tags/JVM/"/>
+    
+      <category term="虚拟机" scheme="http://KevinWu1993.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java集合类总结</title>
+    <link href="http://KevinWu1993.github.io/2016/03/15/Java/201603/Java%E9%9B%86%E5%90%88%E7%B1%BB%E6%80%BB%E7%BB%93/"/>
+    <id>http://KevinWu1993.github.io/2016/03/15/Java/201603/Java集合类总结/</id>
+    <published>2016-03-14T16:00:00.000Z</published>
+    <updated>2016-03-19T14:32:43.000Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;这篇文章是对java集合类的个人总结&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;﻿&lt;/p&gt;
+&lt;p&gt; 先来看看java集合类中的框架结构：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.Collection[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.List[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.ArrayList[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.LinkedList[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Vector[class]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;java.util.Stack[class]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.set[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.HashSet[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.SortedSet[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;java.util.TreeSet[class]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.Map[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.SortedMap[interface]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;java.util.TreeMap[class]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Hashtable[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.HashMap[class]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;java.util.LinkedHashMap[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.WeakHashMap[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ConcurrentHashMap[class]&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;Collection接口&quot;&gt;&lt;a href=&quot;#Collection接口&quot; class=&quot;headerlink&quot; title=&quot;Collection接口&quot;&gt;&lt;/a&gt;Collection接口&lt;/h1&gt;&lt;p&gt;Collection是最基本的集合类接口，一个Collection代表一组Object，即Collection的元素。一些Collection支持相同的元素，而一些不支持，一些支持排序，java不提供直接继承Collection的类，只提供了继承自Collection的子接口的接口入List和Set。&lt;/p&gt;
+&lt;p&gt;所有集合类都实现了Iterator接口，这是一个遍历集合中的元素的接口，主要包含hasNext()、next()、和remove()三种方法。它的子接口LinkedIterator还在它的基础上加了三种方法：add()、previous()、hasPrevious()。所以只实现了Iterator接口的类，只能往后遍历，被遍历过的元素不会再被遍历到，一般无序的集合都实现了这个接口。而有序的集合一般都实现了LinkedIterator接口，这样可以实现双向遍历，如ArrayList，既可以用next()访问下一个元素，又可以用previous()访问前一个元素。&lt;/p&gt;
+&lt;p&gt;需要注意一点是，如果要自己去实现一个集合类，就可以实用java定义好的抽象类，这些抽象类已经为我们提供了许多实现，我们只需要根据需求重写一些方法或添加一些方法就行。&lt;/p&gt;
+&lt;p&gt;根据用途的不同，Collection划分为List和Set。&lt;/p&gt;
+&lt;h2 id=&quot;List接口&quot;&gt;&lt;a href=&quot;#List接口&quot; class=&quot;headerlink&quot; title=&quot;List接口&quot;&gt;&lt;/a&gt;List接口&lt;/h2&gt;&lt;p&gt;List是继承自Collection的接口。它是有序的，使用这个接口可以精准地控制每个元素插入的位置。可以使用index索引值来访问List中的元素。跟Set不同，List允许有重复的元素。&lt;/p&gt;
+&lt;p&gt;除了具备Collection接口的Iterator()方法外，List还提供了一个listIterator()方法，返回的是一个ListIterator接口，这个接口与标准Iterator接口相比，多了一些add()之类的方法，允许添加，删除，设定元素，还可以向前，向后遍历。&lt;/p&gt;
+&lt;p&gt;实现了List接口的常用类有LinkedList，ArrayList，Vector和Stack。&lt;/p&gt;
+&lt;h3 id=&quot;LinkedList类&quot;&gt;&lt;a href=&quot;#LinkedList类&quot; class=&quot;headerlink&quot; title=&quot;LinkedList类&quot;&gt;&lt;/a&gt;LinkedList类&lt;/h3&gt;&lt;p&gt;LinkedList类实现了List接口，允许插入null元素。可以把它看成双向链表，可以使用LinkedList实现栈（stack）、队列（queue）或双向队列（deque）。&lt;/p&gt;
+&lt;p&gt;需要注意的是LinkedList没有同步的方法，如果需要在多个线程中访问LinkedList，就需要注意线程同步的问题，或者在创建List时构造一个同步的List，代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;Object&amp;gt; list=Collections.synchronizedList(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; LinkedList&amp;lt;&amp;gt;());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;ArrayList类&quot;&gt;&lt;a href=&quot;#ArrayList类&quot; class=&quot;headerlink&quot; title=&quot;ArrayList类&quot;&gt;&lt;/a&gt;ArrayList类&lt;/h3&gt;&lt;p&gt;ArrayList可以理解为动态数组。它允许所有的元素，包括null值的元素。ArrayList的初始大小为10，当容量不足时，就会设置成原来的容量的1.5倍加1的新容量，一般确定元素数量的情况下使用ArrayList，否则应该使用LinkedList，因为当容量不足时，都要将原来的元素复制到一个新的数组中，这个操作非常耗时。&lt;/p&gt;
+&lt;p&gt;同样，ArrayList类也不是同步的，需要注意线程同步问题。&lt;/p&gt;
+&lt;h3 id=&quot;Vector类&quot;&gt;&lt;a href=&quot;#Vector类&quot; class=&quot;headerlink&quot; title=&quot;Vector类&quot;&gt;&lt;/a&gt;Vector类&lt;/h3&gt;&lt;p&gt;Vector类与ArrayList类非常相似，默认值也是10，当容量不足时，如果制定了incr参数，则增加incr个容量，否则直接在原来容量的基础上加倍。&lt;/p&gt;
+&lt;p&gt;Vector和ArrayList有别的还有一点，就是Vector是线程同步的。&lt;/p&gt;
+&lt;p&gt;所以，当一个Iterator被创建且正在被使用时，另一个线程试图改变Vector的元素值时，就会抛出ConcurrentModificationException异常。&lt;/p&gt;
+&lt;h4 id=&quot;Stack类&quot;&gt;&lt;a href=&quot;#Stack类&quot; class=&quot;headerlink&quot; title=&quot;Stack类&quot;&gt;&lt;/a&gt;Stack类&lt;/h4&gt;&lt;p&gt;Stack类继承自Vector类，也就是说Vector有的方法它都有，而且在这基础上，实现了先进后出的栈。它提供了5个额外的方法使得一个Vector可以当做堆栈使用，5个方法如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;push 进栈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pop 出栈&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;peek 得到栈顶的元素&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;empty 测试栈是否为空&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;search 检测一个元素在堆栈中的位置&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Set接口&quot;&gt;&lt;a href=&quot;#Set接口&quot; class=&quot;headerlink&quot; title=&quot;Set接口&quot;&gt;&lt;/a&gt;Set接口&lt;/h2&gt;&lt;p&gt;Set和List一样是继承自Collection接口，但与List不同的是，Set是一种不可以包含重复元素的集合。Set类最多只允许有一个null值（有两个null值不就重复了么？～～）。&lt;/p&gt;
+&lt;h3 id=&quot;HashSet类&quot;&gt;&lt;a href=&quot;#HashSet类&quot; class=&quot;headerlink&quot; title=&quot;HashSet类&quot;&gt;&lt;/a&gt;HashSet类&lt;/h3&gt;&lt;p&gt;这个类实现了Set接口，它底层是基于HashMap实现的，HashSet的底层使用HashMap来保存所有的元素，在Set里面用的只是Map的key，在HashSet里面判断两个元素是否相等，是通过hasCode()和equal()两个方法共同完成的，如果集合的对象中没有重写者两个方法，就会使用object继承来的方法，即比较地址。&lt;/p&gt;
+&lt;h3 id=&quot;SortedSet接口&quot;&gt;&lt;a href=&quot;#SortedSet接口&quot; class=&quot;headerlink&quot; title=&quot;SortedSet接口&quot;&gt;&lt;/a&gt;SortedSet接口&lt;/h3&gt;&lt;p&gt;SortedSet接口里面的元素一定是有序的。这里的有序不是指插入顺序，而是指根据对象的比较顺序。&lt;/p&gt;
+&lt;p&gt;对于SortedSet这个接口，目前java仅有一个具体实现的类——TreeSet。&lt;/p&gt;
+&lt;h4 id=&quot;TreeSet类&quot;&gt;&lt;a href=&quot;#TreeSet类&quot; class=&quot;headerlink&quot; title=&quot;TreeSet类&quot;&gt;&lt;/a&gt;TreeSet类&lt;/h4&gt;&lt;p&gt;TreeSet类实现Set接口，它是依靠TreeMap实现的，对于TreeSet，需要注意以下几点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;TreeSet存储对象的时候，可以排序，但是需要指定排序算法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Integer可以有默认顺序，String有默认顺序，但是如果是自定义类型，则会出现异常（因为没有默认顺序）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果想把自定义类型存入TreeSet进行排序，那么就需要对该类型实现Comparable接口并重写compareTo()方法，这样在调用add()方法往TreeSet对象添加元素时就会自动调用比较的方法，根据比较的结果使用二叉树的形式存储。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Map接口&quot;&gt;&lt;a href=&quot;#Map接口&quot; class=&quot;headerlink&quot; title=&quot;Map接口&quot;&gt;&lt;/a&gt;Map接口&lt;/h2&gt;&lt;p&gt;Map接口没有继承Collection接口。也就是说Map和Collection是两种不同类型的集合。Collection可以看做是value（值）的集合，而Map可以看做是key,value（键值对）的集合。&lt;/p&gt;
+&lt;p&gt;Map有3种集合视图，分别为一组key集合、一组value集合或者一组key-value映射。&lt;/p&gt;
+&lt;h3 id=&quot;SortedMap接口&quot;&gt;&lt;a href=&quot;#SortedMap接口&quot; class=&quot;headerlink&quot; title=&quot;SortedMap接口&quot;&gt;&lt;/a&gt;SortedMap接口&lt;/h3&gt;&lt;p&gt;保证按照键的升序排列的映射，可以按照键的自然顺序进行排序，或者通过创建有序映射时提供的比较器进行排序。&lt;/p&gt;
+&lt;p&gt;这个接口的一个比较常用的实现类是TreeMap。&lt;/p&gt;
+&lt;h4 id=&quot;TreeMap类&quot;&gt;&lt;a href=&quot;#TreeMap类&quot; class=&quot;headerlink&quot; title=&quot;TreeMap类&quot;&gt;&lt;/a&gt;TreeMap类&lt;/h4&gt;&lt;p&gt;TreeMap类是SortedMap接口的一个具体实现，这个类保证了映射按照升序排序关键字，基于红黑树（自平衡二叉查找树）。根据构造方法的不同，可能按照键值的自然顺序排序，或者按照创建时所提供的比较器进行排序。这个类也是不允许重复值的，和HashMap一样，如果插入重复的元素，后面的元素就会覆盖掉前面的。它的键key不可以为null，但是值可以为null。&lt;/p&gt;
+&lt;h3 id=&quot;Hashtable类&quot;&gt;&lt;a href=&quot;#Hashtable类&quot; class=&quot;headerlink&quot; title=&quot;Hashtable类&quot;&gt;&lt;/a&gt;Hashtable类&lt;/h3&gt;&lt;p&gt;Hashtable是Map接口的一个具体实现，实现了一个key-value映射的哈希表。Hashtable的key和value都不允许为空。&lt;/p&gt;
+&lt;p&gt;添加数据时使用put(key,value)，获取一个数据时使用get(key)。&lt;/p&gt;
+&lt;p&gt;默认容量大小为11，每次扩容，都是将容量变成原来的2倍加1。&lt;/p&gt;
+&lt;p&gt;Hashtable通过initial capacity和load factor两个参数来调整性能。默认的load factor 0.75较好地实现了时间和空间的均衡。增大load factor可以节省空间但相应的查找时间将会增大，会影响get和put等操作。&lt;/p&gt;
+&lt;p&gt;Hashtable是线程同步的。&lt;/p&gt;
+&lt;h3 id=&quot;HashMap类&quot;&gt;&lt;a href=&quot;#HashMap类&quot; class=&quot;headerlink&quot; title=&quot;HashMap类&quot;&gt;&lt;/a&gt;HashMap类&lt;/h3&gt;&lt;p&gt;HashMap也实现了一个key-value映射的哈希表，存储结构和冲突解决与hashtable一致，但HashMap是允许null值的，即key和value的值都允许为null，其中key为null的键值对永远存放在以table[0]为头节点的链表中，当然不一定是存放在头节点table[0]中。&lt;/p&gt;
+&lt;p&gt;HashMap的默认大小为16，无论设定容量为多少，构造方法都会将实际容量设为不小于指定容量的2的次方的一个数，这样是为了让hash发生碰撞的概率较小，使元素在哈希表中均匀地散列，且这个数的最大值不能超过2的30次方。&lt;/p&gt;
+&lt;p&gt;每次加入键值对时，都要判断当前已用的槽的数目是否大于等于【容量*load factor】(load factor默认0.75)，如果大于或等于，就进行扩容，每次扩容，容量都编程原来的两倍。&lt;/p&gt;
+&lt;h5 id=&quot;补充：Hashtable和HashMap的区别&quot;&gt;&lt;a href=&quot;#补充：Hashtable和HashMap的区别&quot; class=&quot;headerlink&quot; title=&quot;补充：Hashtable和HashMap的区别&quot;&gt;&lt;/a&gt;补充：Hashtable和HashMap的区别&lt;/h5&gt;&lt;p&gt;它们的主要区别在于：线程安全性、同步以及速度&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;HashMap几乎可以等价于Hashtable，除了HashMap是非synchronized的和允许空值null。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HashMap是非synchronized的，而Hashtable是synchronized的，这意味者Hashtable是线程安全的，多线程可以共享一个Hashtable，如果没有使用同步，多线程不能共享HashMap。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;另一个区别是HashMap的迭代器Iterator是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素）时将会抛出ConcurrentModificationException异常。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由于Hashtable是线程安全的，所以在单线程情况下要比HashMap要慢。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HashMap不能保证随着时间的推移Map中的元素次序是不变的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;LinkedHashMap类&quot;&gt;&lt;a href=&quot;#LinkedHashMap类&quot; class=&quot;headerlink&quot; title=&quot;LinkedHashMap类&quot;&gt;&lt;/a&gt;LinkedHashMap类&lt;/h4&gt;&lt;p&gt;LinkedHashMap类是HashMap和LinkedList的结合，它的父类是HashMap。它额外定义了一个head为头节点的空的双向循环链表，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的，就是说与键值对的插入顺序保持一致。因为要维护插入顺序，所以性能要低于HashMap，但是在迭代访问元素时会有很好的性能，因为它以链表维护内部顺序。&lt;/p&gt;
+&lt;h4 id=&quot;WeakHashMap类&quot;&gt;&lt;a href=&quot;#WeakHashMap类&quot; class=&quot;headerlink&quot; title=&quot;WeakHashMap类&quot;&gt;&lt;/a&gt;WeakHashMap类&lt;/h4&gt;&lt;p&gt;WeakHashMap的用法基本与HashMap相同，区别在于HashMap的key保留对象的强引用，即只要HashMap对象不被销毁，其对象所有key所引用的对象不会被垃圾回收，HashMap也不会自动删除这些key所对应的键值对象。但WeakHashMap的key所引用的对象没有被其他强引用的变量所引用，则这些key所引用的对象可能被回收。WeakHashMap中的每个key对象保存了实际对象的弱引用，当回收了该key所对应的实际对象后，WeakHashMap会自动删除该key对应的键值对。&lt;/p&gt;
+&lt;h3 id=&quot;ConcurrentHashMap类&quot;&gt;&lt;a href=&quot;#ConcurrentHashMap类&quot; class=&quot;headerlink&quot; title=&quot;ConcurrentHashMap类&quot;&gt;&lt;/a&gt;ConcurrentHashMap类&lt;/h3&gt;&lt;p&gt;ConcurrentHashMap最重要的是引入了Segment的概念，他在自己内部定义了这个Class来管理数据，这个Segment类似与HashMap的定义，ConcurrentHashMap会将对应的读写操作交给Segment。&lt;/p&gt;
+&lt;p&gt;ConcurrentHashMap默认将Map分成16个Segment，分段锁，有16个写线程执行写，而读的大部分时候都不需要用到锁。只有在size等操作时才需要锁住整个哈希表。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;这篇文章是对java集合类的个人总结&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/tags/Java/"/>
+    
+      <category term="集合" scheme="http://KevinWu1993.github.io/tags/%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RxJava初步学习总结</title>
+    <link href="http://KevinWu1993.github.io/2016/03/13/Android/201603/RxJava%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>http://KevinWu1993.github.io/2016/03/13/Android/201603/RxJava初步学习总结/</id>
+    <published>2016-03-12T16:00:00.000Z</published>
+    <updated>2016-03-26T12:06:36.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt; 我们常用的对按钮事件的监听就是观察者模式的一个例子，对于观察者模式，简单的说就是有一个观察者，有个可以被当做观察的对象，这之间通过注册（register）或者订阅（subscribe）的方式进行绑定，当被观察的对象发生改变时，观察者就根据对象的动作做出相应的响应。 &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在OnClickListener事件中，Button作为被观察者，onClickListener作为观察者，通过setOnClickListener订阅，onClick就是被观察者有动作后做出的相应事件。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;由此，引入RxJava中的拓展的观察者模式。&lt;/p&gt;
+&lt;p&gt;在RxJava中，角色对应如下：&lt;/p&gt;
+&lt;p&gt;观察者：Observer&lt;/p&gt;
+&lt;p&gt;被观察者：Observable&lt;/p&gt;
+&lt;p&gt;订阅：subscribe&lt;/p&gt;
+&lt;p&gt;响应：onNext()——普通响应&lt;br&gt;onCompleted()——事件队列完结响应&lt;br&gt;onError()——事件队列异常响应&lt;/p&gt;
+&lt;p&gt;（onCompleted()和onError()这两个方法只会调用其中一个，这也很好理解，完结了就肯定没有异常嘛！）&lt;/p&gt;
+&lt;h3 id=&quot;创建一个Observer（观察者）&quot;&gt;&lt;a href=&quot;#创建一个Observer（观察者）&quot; class=&quot;headerlink&quot; title=&quot;创建一个Observer（观察者）&quot;&gt;&lt;/a&gt;创建一个Observer（观察者）&lt;/h3&gt;&lt;p&gt;先看一下observer接口的实现：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Observer&amp;lt;String&amp;gt; observer =&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Observer&amp;lt;String&amp;gt;()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String s)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Log.d(TAG,&lt;span class=&quot;string&quot;&gt;&quot;Item is :&quot;&lt;/span&gt;+s);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onCompleted&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Log.d(TAG,&lt;span class=&quot;string&quot;&gt;&quot;All things are completed!&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onError&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Throwable e)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Log.d(TAG,&lt;span class=&quot;string&quot;&gt;&quot;Opps! Somethings is error!&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;除了Observer接口，RxJava还有一个Subscriber，翻译过来就是注册者，和观察者一个道理，不过在这里它是一个Observer接口实现的抽象类，只是针对Observer进行了一些扩展，基本的使用方式一样。&lt;/p&gt;
+&lt;p&gt;在RxJava的订阅（subscribe）过程中，一个Observer也会被转化成Subscriber再使用，但他们也有点区别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;onStart()：这个是Subscriber新增的方法，会在订阅subscribe刚开始时被调用，可以在这里面做一些准备工作，如对数据进行清零或者重置。需要注意的是这个方法只能在subscribe线程中调用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;unsubscribe()：这是Subscriber实现另一个接口Subscription的方法，用来取消订阅。这个方法被调用以后，Subscriber将不再继续观察（接收事件）。一般执行这个方法前，应该使用isUnsubscribed()先判断一下状态。unsubscribe()这个方法的使用可以避免内存泄露情况的发生。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;创建一个Observable（被观察者）&quot;&gt;&lt;a href=&quot;#创建一个Observable（被观察者）&quot; class=&quot;headerlink&quot; title=&quot;创建一个Observable（被观察者）&quot;&gt;&lt;/a&gt;创建一个Observable（被观察者）&lt;/h3&gt;&lt;p&gt;RxJava使用create()方法来创建一个Observable并定义触发规则，下面看看怎么创建一个被观察的对象：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Observable observable = Observable.create(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Observable.OnSubscribe&amp;lt;String&amp;gt;()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Subscriber&amp;lt;? &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; String&amp;gt; subscriber)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        subscriber.onNext(&lt;span class=&quot;string&quot;&gt;&quot;Hello&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        subscriber.onNext(&lt;span class=&quot;string&quot;&gt;&quot;Hi&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        subscriber.onCompleted();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里传入一个OnSubscribe对象作为参数，OnSubscribe会被存储在返回的Observable的对象observable中，它的作用相当与一个计划表，当Observable被订阅的时候，OnSubscribe的call方法会自动被调用，事件序列就会依照设定依次触发。这样由被观察者触发了观察者的回调方法，这样就实现了由被观察者向观察者的事件传递。&lt;/p&gt;
+&lt;p&gt;RxJava还提供了几个快捷创建事件队列的方法，如果要实现上面的功能，还可以使用以下两种方法：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Observable observable=Observable.just(&lt;span class=&quot;string&quot;&gt;&quot;Hello&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;Hi&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String [] info=&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;Hello&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;Hi&quot;&lt;/span&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Observable observable=Observable.from(info);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;Subscribe（订阅）&quot;&gt;&lt;a href=&quot;#Subscribe（订阅）&quot; class=&quot;headerlink&quot; title=&quot;Subscribe（订阅）&quot;&gt;&lt;/a&gt;Subscribe（订阅）&lt;/h3&gt;&lt;p&gt;订阅后，就将Observer和Observable联结起来了，这个过程就可以正常工作了，订阅的代码如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;observable.subscribe(observer);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//或者subscriber，具体看用了哪个&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;observable.subscribe(subscriber);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;需要注意的是，这里换成语义是被观察者订阅了观察者，而不是观察者订阅被观察者。&lt;/p&gt;
+&lt;p&gt;observable.subscribe(subscriber)内部实现中做了三件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;调用Subscriber.onStart()方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;调用Observable的OnSubscribe.call(Subscriber)方法。在RxJava中，Observable不是一创建就会发送事件，而是在它被订阅的时候，即subscribe()方法被执行的时候&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将传入的Subscriber作为Subscription返回，这里可以方便执行unsubscribe()&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以上是一个RxJava的学习简单总结，更深入的总结后续继续进行。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt; 我们常用的对按钮事件的监听就是观察者模式的一个例子，对于观察者模式，简单的说就是有一个观察者，有个可以被当做观察的对象，这之间通过注册（register）或者订阅（subscribe）的方式进行绑定，当被观察的对象发生改变时，观察者就根据对象的动作做出相应的响应。 &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在OnClickListener事件中，Button作为被观察者，onClickListener作为观察者，通过setOnClickListener订阅，onClick就是被观察者有动作后做出的相应事件。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://KevinWu1993.github.io/categories/Android/"/>
+    
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/tags/Java/"/>
+    
+      <category term="RxJava" scheme="http://KevinWu1993.github.io/tags/RxJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gson学习笔记</title>
+    <link href="http://KevinWu1993.github.io/2016/01/30/Android/201601/Gson%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://KevinWu1993.github.io/2016/01/30/Android/201601/Gson学习笔记/</id>
+    <published>2016-01-29T16:00:00.000Z</published>
+    <updated>2016-03-20T02:52:23.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Gson是什么&quot;&gt;&lt;a href=&quot;#Gson是什么&quot; class=&quot;headerlink&quot; title=&quot;Gson是什么&quot;&gt;&lt;/a&gt;Gson是什么&lt;/h2&gt;&lt;p&gt;要了解Gson是什么，恐怕得先说一下Json这个东西&lt;br&gt;（Json的背景知识就直接引用网络上的了&lt;a href=&quot;http://www.open-open.com/lib/view/open1407376535942.html）。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.open-open.com/lib/view/open1407376535942.html）。&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;什么是Json&quot;&gt;&lt;a href=&quot;#什么是Json&quot; class=&quot;headerlink&quot; title=&quot;什么是Json&quot;&gt;&lt;/a&gt;什么是Json&lt;/h3&gt;&lt;p&gt;JSON即JavaScript Object Natation, 它是一种轻量级的数据交换格式, 与XML一样, 是广泛被采用的客户端和服务端交互的解决方案.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Json对象&quot;&gt;&lt;a href=&quot;#Json对象&quot; class=&quot;headerlink&quot; title=&quot;Json对象&quot;&gt;&lt;/a&gt;Json对象&lt;/h3&gt;&lt;p&gt;JSON中对象(Object)以”{“开始, 以”}”结束. 对象中的每一个item都是一个key-value对, 表现为”key:value”的形式, key-value对之间使用逗号分隔. 如:{“name”:”coolxing”, “age”=24, “male”:true, “address”:{“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}}. JSON对象的key只能是string类型的, 而value可以是string, number, false, true, null, Object对象甚至是array数组, 也就是说可以存在嵌套的情况.&lt;/p&gt;
+&lt;h3 id=&quot;Json数组&quot;&gt;&lt;a href=&quot;#Json数组&quot; class=&quot;headerlink&quot; title=&quot;Json数组&quot;&gt;&lt;/a&gt;Json数组&lt;/h3&gt;&lt;p&gt;JSON数组(array)以”[“开始, 以”]”结束, 数组中的每一个元素可以是string, number, false, true, null, Object对象甚至是array数组, 数组间的元素使用逗号分隔. 如[“coolxing”, 24, {“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}].&lt;/p&gt;
+&lt;p&gt;好了Json的基本背景介绍完了，先看看一个天气Api返回的Json对象吧（截取部分）。&lt;br&gt;完整的json返回数据示例地址：&lt;a href=&quot;https://github.com/KevinWu1993/YTWeatherPro/blob/dev/doc/%E5%AE%8C%E6%95%B4json%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/KevinWu1993/YTWeatherPro/blob/dev/doc/%E5%AE%8C%E6%95%B4json%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE.md&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;59&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;reason&amp;quot;: &amp;quot;查询成功&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;result&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;quot;data&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;quot;realtime&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;city_code&amp;quot;: &amp;quot;101210701&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;city_name&amp;quot;: &amp;quot;温州&amp;quot;,     /*城市*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;date&amp;quot;: &amp;quot;2014-10-15&amp;quot;,  /*日期*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;time&amp;quot;: &amp;quot;09:00:00&amp;quot;,     /*更新时间*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;week&amp;quot;: 3,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;moon&amp;quot;: &amp;quot;九月廿二&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;dataUptime&amp;quot;: 1413337811,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;weather&amp;quot;: &amp;#123;    /*当前实况天气*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;temperature&amp;quot;: &amp;quot;19&amp;quot;,     /*温度*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;humidity&amp;quot;: &amp;quot;54&amp;quot;,     /*湿度*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;info&amp;quot;: &amp;quot;雾&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;img&amp;quot;: &amp;quot;18&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;wind&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;direct&amp;quot;: &amp;quot;北风&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;power&amp;quot;: &amp;quot;1级&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;offset&amp;quot;: null,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;windspeed&amp;quot;: null&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;quot;life&amp;quot;: &amp;#123;     /*生活指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;date&amp;quot;: &amp;quot;2014-10-15&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;quot;info&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;chuanyi&amp;quot;: [     /*穿衣指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较舒适&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;建议着薄外套或牛仔衫裤等服装。年老体弱者宜着夹克衫、薄毛衣等。昼夜温差较大，注意适当增减衣服。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;ganmao&amp;quot;: [    /*感冒指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较易发&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;昼夜温差较大，较易发生感冒，请适当增减衣服。体质较弱的朋友请注意防护。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;kongtiao&amp;quot;: [   /*空调指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较少开启&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;您将感到很舒适，一般不需要开启空调。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;wuran&amp;quot;: [     /*污染指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;良&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;气象条件有利于空气污染物稀释、扩散和清除，可在室外正常活动。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;xiche&amp;quot;: [     /*洗车指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较适宜&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;yundong&amp;quot;: [     /*运动指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;较适宜&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;天气较好，但风力较大，推荐您进行室内运动，若在户外运动请注意防风。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;quot;ziwaixian&amp;quot;: [   /*紫外线*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;中等&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        &amp;quot;属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    ]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         ............&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;上面是天气Api返回的json对象，之前开发中是用org.json工具进行解析的，可能我对那个工具也没有参悟得很透彻，我感觉我用的是最笨的方法，下面给出一小段之前写的解析代码：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//取得result根&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; JSONObject jsonresult = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JSONObject(value);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; String resultSTR = jsonresult.getString(&lt;span class=&quot;string&quot;&gt;&quot;result&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;comment&quot;&gt;//取得DATA根&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; JSONObject jsonDATA = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JSONObject(resultSTR);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; String dataSTR = jsonDATA.getString(&lt;span class=&quot;string&quot;&gt;&quot;data&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//取得realtime根&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; JSONObject jsonRT = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JSONObject(dataSTR);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; String rtSTR = jsonRT.getString(&lt;span class=&quot;string&quot;&gt;&quot;realtime&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;JSONObject jsonRealTime = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JSONObject(rtSTR);&lt;span class=&quot;comment&quot;&gt;//这个是realtime的json对象&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String city = jsonRealTime.getString(&lt;span class=&quot;string&quot;&gt;&quot;city_name&quot;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//取得城市名称&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; String updatetime = jsonRealTime.getString(&lt;span class=&quot;string&quot;&gt;&quot;date&quot;&lt;/span&gt;) + &lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt; + jsonRealTime.getString(&lt;span class=&quot;string&quot;&gt;&quot;time&quot;&lt;/span&gt;);&lt;span class=&quot;comment&quot;&gt;//获得更新时间，即为返回的数据的日期加更新具体时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;好了！废话说了这么多，该谈谈Gson了，回到那个问题，Gson是什么？&lt;br&gt;其实也就是一个工具。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;使用Gson前准备工作&quot;&gt;&lt;a href=&quot;#使用Gson前准备工作&quot; class=&quot;headerlink&quot; title=&quot;使用Gson前准备工作&quot;&gt;&lt;/a&gt;使用Gson前准备工作&lt;/h2&gt;&lt;p&gt;要使用它，我们要先下载它的依赖包，可以直接去github开源项目地址下载：&lt;a href=&quot;https://github.com/google/gson&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/google/gson&lt;/a&gt;&lt;br&gt;我也搬运过来了，直接去下载也可以：&lt;a href=&quot;http://download.csdn.net/detail/kevinwu93/9422464&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/detail/kevinwu93/9422464&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载后，我们需要在工程项目中依赖它这个jar包，以Android Studio为例，可以放到module中的libs目录下，如下图所示：&lt;br&gt;&lt;img src=&quot;http://img.blog.csdn.net/20160130141817334&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;br&gt;接下来还需要在gradle文件中添加依赖语句&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;compile files(&amp;apos;libs/gson-2.5.jar&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样，我们就导入这个工具了，接下来就可以使用了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;正式使用Gson&quot;&gt;&lt;a href=&quot;#正式使用Gson&quot; class=&quot;headerlink&quot; title=&quot;正式使用Gson&quot;&gt;&lt;/a&gt;正式使用Gson&lt;/h2&gt;&lt;p&gt;这里主要讨论使用Gson的fromJson()方法解析Json字符串，获取相应的数据，至于toJson()方法，以后应该还会写篇文章。&lt;/p&gt;
+&lt;p&gt;先来看看fromJson()这个方法：&lt;br&gt;fromJson()这个方法的用法如下：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Gson().fromJson(Json_string,&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;参数需要json字符串和一个实体，所以下面先来针对以上天气的返回数据创建一个实体：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WeatherEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String reason;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ResultEntity result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; error_code;&lt;span class=&quot;comment&quot;&gt;//错误码&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在这个天气实体中我分成了三部分，第一部分为一个字符串，对应返回的json数据的reason字段：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;quot;reason&amp;quot;: &amp;quot;查询成功&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;最后的error_code对应json数据中的error_code字段：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;quot;error_code&amp;quot;: 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;下面说一下中中间的public ResultEntity result;这个实体类型&lt;br&gt;因为返回的result字段的数据比较复杂，所以继续细分出来，先看看ResultEntityEntity这个类的代码：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ResultEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; DataEntity data;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;因为result中又包含了一个data字段，所有我再分了一层，再来看看DataEntity部分的代码&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;DataEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; RealtimeEntity realtime;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; LifeEntity life;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ArrayList&amp;lt;AdayWeatherEntity&amp;gt; weather=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ArrayList&amp;lt;AdayWeatherEntity&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Pm25Entity pm25;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; date;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; isForeign;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;分析这段代码前，先看一下返回的json的数据的结构（建议参照完整json数据返回内容）：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;quot;realtime&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;city_code&amp;quot;: &amp;quot;101210701&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;city_name&amp;quot;: &amp;quot;温州&amp;quot;,     /*城市*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;date&amp;quot;: &amp;quot;2014-10-15&amp;quot;,  /*日期*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;time&amp;quot;: &amp;quot;09:00:00&amp;quot;,     /*更新时间*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       ............................省略&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;life&amp;quot;: &amp;#123;     /*生活指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;date&amp;quot;: &amp;quot;2014-10-15&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;info&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;chuanyi&amp;quot;: [     /*穿衣指数*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;quot;较舒适&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;quot;建议着薄外套或牛仔衫裤等服装。年老体弱者宜着夹克衫、薄毛衣等。昼夜温差较大，注意适当增减衣服。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         ............................省略&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;weather&amp;quot;: [   /*未来几天天气预报*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;date&amp;quot;: &amp;quot;2014-10-15&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;info&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;              &amp;quot;day&amp;quot;: [     /*白天天气*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ............................省略&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;pm25&amp;quot;: &amp;#123;    /*PM2.5*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;key&amp;quot;: &amp;quot;Wenzhou&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;show_desc&amp;quot;: 0,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;pm25&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;curPm&amp;quot;: &amp;quot;97&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;pm25&amp;quot;: &amp;quot;72&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;pm10&amp;quot;: &amp;quot;97&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;level&amp;quot;: 2,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;quality&amp;quot;: &amp;quot;良&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &amp;quot;des&amp;quot;: &amp;quot;可以接受的，除极少数对某种污染物特别敏感的人以外，对公众健康没有危害。&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;dateTime&amp;quot;: &amp;quot;2014年10月15日09时&amp;quot;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;quot;cityName&amp;quot;: &amp;quot;温州&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;date&amp;quot;: null,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;isForeign&amp;quot;: 0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;可以看到这里有几大字段，分别为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;realtime&lt;/li&gt;
+&lt;li&gt;life&lt;/li&gt;
+&lt;li&gt;weather&lt;/li&gt;
+&lt;li&gt;pm25&lt;/li&gt;
+&lt;li&gt;date&lt;/li&gt;
+&lt;li&gt;isForeign&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于date和isForeign这两个字段来说，单一数据，可以直接用对应的数据类型做实体，解析很简单。&lt;br&gt;对应realtime等类型的数据，结构相对来说还是比较复杂的，这里再单独出来进行解析，就用realtime做例子，其它的有需要可以参考github上项目的完整代码，这里不详细说明。&lt;br&gt;先来看看RealtimeEntity这个类：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;RealtimeEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String city_code;&lt;span class=&quot;comment&quot;&gt;//城市代码&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String city_name;&lt;span class=&quot;comment&quot;&gt;//城市名称&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String date;&lt;span class=&quot;comment&quot;&gt;//日期&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String time;&lt;span class=&quot;comment&quot;&gt;//更新时间&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; week;&lt;span class=&quot;comment&quot;&gt;//星期&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String moon;&lt;span class=&quot;comment&quot;&gt;//农历、&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;long&lt;/span&gt; dataUptime;&lt;span class=&quot;comment&quot;&gt;//更新时间戳&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; RealTimeWeatherEntity weather;&lt;span class=&quot;comment&quot;&gt;//实时天气实体&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; RealtimeWindEntity wind;&lt;span class=&quot;comment&quot;&gt;//风速风力信息实体&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;对于单一数据没嵌套的直接解析，对于还有嵌套的，继续细分，接下来看看RealTimeWeatherEntity和RealtimeWindEntity这两个类：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;RealTimeWeatherEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String tempertrue;&lt;span class=&quot;comment&quot;&gt;//实时温度&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String humidity;&lt;span class=&quot;comment&quot;&gt;//湿度&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String info;&lt;span class=&quot;comment&quot;&gt;//天气信息&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String img;&lt;span class=&quot;comment&quot;&gt;//天气对应图片&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;RealtimeWindEntity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String direct;&lt;span class=&quot;comment&quot;&gt;//风向&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String power;&lt;span class=&quot;comment&quot;&gt;//风力&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String offset;&lt;span class=&quot;comment&quot;&gt;//风向偏移量&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; String windspeed;&lt;span class=&quot;comment&quot;&gt;//风速&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这两个类都只是对数据进行定义，相当于把json中的数据一一对应地描述出来，这样进行了多层细分后，realtime这个字段返回的数据就每个都有了对应的变量来描述，其他的也同样道理，在对所有的数据进行实体定义后，就可以调用Gson方法进行解析了，解析部分的代码如下（我把测试的json数据放在个txt文件里面了）：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    *测试gson实体&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    *&lt;span class=&quot;doctag&quot;&gt;@author&lt;/span&gt; KevinWu&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    *create at 2016/1/29 22:15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Test&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;testEntity&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String jsonStr=importStr();&lt;span class=&quot;comment&quot;&gt;//导入要测试的数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        System.out.println(jsonStr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Gson gson=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Gson();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        WeatherEntity w=gson.fromJson(jsonStr,WeatherEntity.class);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        System.out.println(w.result.data.pm25.pm25.pm10);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; String &lt;span class=&quot;title&quot;&gt;importStr&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String str=&lt;span class=&quot;string&quot;&gt;&quot;&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        File myFile=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; File(&lt;span class=&quot;string&quot;&gt;&quot;./json_test.txt&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            FileReader myFileReader=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FileReader(myFile);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            BufferedReader myBufferedReader=&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; BufferedReader(myFileReader);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            String temp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt;((temp=myBufferedReader.readLine())!=&lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                str=str+temp;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            myBufferedReader.close();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            myFileReader.close();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (FileNotFoundException e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            e.printStackTrace();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (IOException e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            e.printStackTrace();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; str;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;就这样。&lt;/p&gt;
+&lt;p&gt;Github项目地址：&lt;a href=&quot;https://github.com/KevinWu1993/YTWeatherPro&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/KevinWu1993/YTWeatherPro&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Gson是什么&quot;&gt;&lt;a href=&quot;#Gson是什么&quot; class=&quot;headerlink&quot; title=&quot;Gson是什么&quot;&gt;&lt;/a&gt;Gson是什么&lt;/h2&gt;&lt;p&gt;要了解Gson是什么，恐怕得先说一下Json这个东西&lt;br&gt;（Json的背景知识就直接引用网络上的了&lt;a href=&quot;http://www.open-open.com/lib/view/open1407376535942.html）。&quot;&gt;http://www.open-open.com/lib/view/open1407376535942.html）。&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;什么是Json&quot;&gt;&lt;a href=&quot;#什么是Json&quot; class=&quot;headerlink&quot; title=&quot;什么是Json&quot;&gt;&lt;/a&gt;什么是Json&lt;/h3&gt;&lt;p&gt;JSON即JavaScript Object Natation, 它是一种轻量级的数据交换格式, 与XML一样, 是广泛被采用的客户端和服务端交互的解决方案.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://KevinWu1993.github.io/categories/Android/"/>
+    
+    
+      <category term="Java" scheme="http://KevinWu1993.github.io/tags/Java/"/>
+    
+      <category term="Android" scheme="http://KevinWu1993.github.io/tags/Android/"/>
+    
+      <category term="Gson" scheme="http://KevinWu1993.github.io/tags/Gson/"/>
+    
+      <category term="Json" scheme="http://KevinWu1993.github.io/tags/Json/"/>
+    
+      <category term="解析" scheme="http://KevinWu1993.github.io/tags/%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+</feed>

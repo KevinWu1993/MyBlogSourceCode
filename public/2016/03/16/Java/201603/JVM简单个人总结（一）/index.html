@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JVM简单个人总结（一） | Kevin Wu&#39;s Blog | 慢几步，深几度</title>
+  <meta name="author" content="Kevin Wu">
+  
+  <meta name="description" content="KevinWu的个人博客">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JVM简单个人总结（一）"/>
+  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Kevin Wu&#39;s Blog</a>
+  </h1>
+  <p class="site-description">慢几步，深几度</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/categories">分类</a></li>
+    
+      <li><a href="/about">我</a></li>
+    
+      <li><a href="/tags">标签</a></li>
+    
+      <li><a href="/link">链接</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>JVM简单个人总结（一）</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/16/Java/201603/JVM简单个人总结（一）/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-15T16:00:00.000Z">
+          2016-03-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>说明：这篇文章只是个人对JVM的初步探讨总结，很多概念来自网络，加入部分个人理解，也许个人理解的地方有误，也恳请看到的同学帮忙指出，关于JVM的具体知识可以阅读《深入理解Java虚拟机：JVM高级特性与最佳性能》这本书籍。<br><a id="more"></a></p>
+<hr>
+<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><p>JVM是Java Virtual Machine的缩写，中文名为java虚拟机，JVM是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。它与VirtualBox那些虚拟PC机的虚拟机又有点区别，它只设置了4个常用的寄存器，分别为：pc程序计数器，optop操作数寄存器，frame当前执行环境指针和vars当前执行环境中的第一个局部变量指针。</p>
+<p>java语言的一个非常重要的特点是平台无关性，而使用java虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入java虚拟机后，java语言在不同平台上运行时就不需要重新编译。Java实用java虚拟机屏蔽了与具体平台的信息，使得java语言编译程序只需生成java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。java虚拟机在执行字节码时，把字节码翻译成具体平台上的机器指令执行。这就是java能够“一次编译，到处运行”的原因。</p>
+<h1 id="JRE-JDK-JVM的关系"><a href="#JRE-JDK-JVM的关系" class="headerlink" title="JRE/JDK/JVM的关系"></a>JRE/JDK/JVM的关系</h1><p>JRE（Java Runtime Environment）：中文名为java运行是环境，也就是java平台。所有的java程序都要在有jre的环境下才能运行。</p>
+<p>JDK（Java Development Kit）：中文名为java开发工具，jdk的工具也是java程序，也需要jre环境才能运行。</p>
+<p>JVM（Java Virtual Machine）：中文名为java虚拟机，这个是jre的一部分。</p>
+<h1 id="JVM环境的加载"><a href="#JVM环境的加载" class="headerlink" title="JVM环境的加载"></a>JVM环境的加载</h1><p>以windows操作系统为例，装入JVM是通过jdk中的Java.exe可执行程序来完成的，具体可以分为四步：</p>
+<ol>
+<li><p>创建JVM装载环境和配置</p>
+</li>
+<li><p>装载JVM.dll</p>
+</li>
+<li><p>初始化JVM.dll并挂到JNIENV（JNI调用接口）实例</p>
+</li>
+<li><p>调用JNIENV实例装载并处理class类</p>
+</li>
+</ol>
+<p>关于这个更详细的信息可以参考这篇文章：<a href="http://blog.csdn.net/ye1992/article/details/38228393" target="_blank" rel="external">http://blog.csdn.net/ye1992/article/details/38228393</a></p>
+<h1 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a>JVM的生命周期</h1><p>当一个Java程序启动时，一个JVM实例就产生了，任何存在public static void main(String [] args)方法的类都可以作为JVM实例运行的起点，所以在平时定义一个Class时就要显示告诉JVM类名，这样JVM才能知道是该运行哪个类里面的main方法。</p>
+<p>main()方法是初始线程的起点，任何其它线程均由该线程启动。JVM内部存在两种线程，分别为守护线程和非守护线程，main()属于非守护线程，守护线程通常由JVM自己使用，Java程序也可以标明自己创建的线程是守护线程。</p>
+<p>当程序中的所有非守护线程都终止时，JVM才退出，程序中也可以使用setDaemon(boolean on)方法来设定为守护线程。（Linux中说守护进程，这里为什么说守护线程呢？因为，java是跑在JVM虚拟机上的）。</p>
+<h1 id="JVM体系结构"><a href="#JVM体系结构" class="headerlink" title="JVM体系结构"></a>JVM体系结构</h1><p>JVM内部分成三部分，分别为：类装载器（ClassLoader）子系统、执行引擎和运行时数据区。</p>
+<ul>
+<li><p>类装载器子系统：就是用来装载.class文件的系统。JVM的两种装载器包括：启动类装载器和用户自定义类装载器。启动类装载器是JVM实现的一部分，用户自定义类装载器则是java程序的一部分，必须是ClassLoader类的子类。</p>
+</li>
+<li><p>执行引擎：执行引擎是Java虚拟机核心组成部分之一，输入的是字节码文件，处理过程就是字节码解析的等效过程，输出的是执行结果，对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法。执行引擎所运行的所有字节码指令都是针对当前栈帧进行操作。</p>
+</li>
+<li><p>运行时数据区：主要有方法区、堆、Java栈、PC寄存器、本地方法栈。</p>
+</li>
+</ul>
+<h2 id="对运行时数据区进行些补充："><a href="#对运行时数据区进行些补充：" class="headerlink" title="对运行时数据区进行些补充："></a>对运行时数据区进行些补充：</h2><ol>
+<li><p>方法区和堆由所有线程共享</p>
+</li>
+<li><p>Java栈和PC寄存器由线程独享，在新线程的创建的时间里</p>
+</li>
+<li><p>本地方法栈：存储本地方法调用的状态</p>
+</li>
+</ol>
+<h2 id="JVM中的数据类型："><a href="#JVM中的数据类型：" class="headerlink" title="JVM中的数据类型："></a>JVM中的数据类型：</h2><p>JVM中的基本数据单元是word，而word的长度由JVM的具体实现者来决定。</p>
+<p><em>数据类型包括基本类型和引用类型：</em></p>
+<ul>
+<li><p>基本数据类型包括：数值类型（除boolean外的所有java基本数据类型），boolean在JVM中使用int来表示，0表示false，其他值均表示true，还有一个returnAddress类型，这个是JVM的内部类型，用来实现finally子句。</p>
+</li>
+<li><p>引用类型包括：数组类型、类类型、接口类型</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Java/">Java</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/JVM/">JVM</a>, <a href="/tags/虚拟机/">虚拟机</a>
+
+
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+<div id="comment">
+<!--
+最近访客
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+-->
+<!-- 多说评论框 start -->
+ <div class="ds-thread" data-thread-key="/
+2016/03/16/Java/201603/JVM简单个人总结（一）/" data-title="JVM简单个人总结（一）" 
+data-url="http://KevinWu1993.github.io/2016/03/16/Java/201603/JVM简单个人总结（一）/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kevinwu1993"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
+  <p class="meta">
+    </br>
+    
+    &copy; 2016 Kevin Wu
+    
+  </p>
+</div>
+</footer>
+    <!---->
+  </div>
+</div>
+</body>
+</html>

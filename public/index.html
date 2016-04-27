@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kevin Wu&#39;s Blog | 慢几步，深几度</title>
+  <meta name="author" content="Kevin Wu">
+  
+  <meta name="description" content="KevinWu的个人博客">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Kevin Wu&#39;s Blog</a>
+  </h1>
+  <p class="site-description">慢几步，深几度</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/categories">分类</a></li>
+    
+      <li><a href="/about">我</a></li>
+    
+      <li><a href="/tags">标签</a></li>
+    
+      <li><a href="/link">链接</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/26/在线刷题/201603/二维数组中的查找——解题及多次优化思路分析/"><span>二维数组中的查找——解题及多次优化思路分析</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/26/在线刷题/201603/二维数组中的查找——解题及多次优化思路分析/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-26T12:01:24.000Z">
+          2016-03-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>来自《剑指Offer》的一道题。</p>
+<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 </p>
+<h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h3><p>array： 待查找的二维数组<br>target：查找的数字<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/在线刷题/">在线刷题</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/查找/">查找</a>, <a href="/tags/二维数组/">二维数组</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/26/在线刷题/201603/二维数组中的查找——解题及多次优化思路分析/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/25/计算机基础/201603/IP地址的分类/"><span>IP地址的分类</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/25/计算机基础/201603/IP地址的分类/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-24T16:00:00.000Z">
+          2016-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>根据不同特征的IP地址，对网络号所占的位数和主机号所占的位数进行分类，分为A、B、C、D、E五类地址。</p>
+<h1 id="A类地址"><a href="#A类地址" class="headerlink" title="A类地址"></a>A类地址</h1><p>A类地址的范围是1.0.0.0~126.255.255.255，高位以0开头，全球共有2^7-2个A类网络，每个A类网络有2^24-2个主机地址。127开头的地址保留为本地回环地址。<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/计算机基础/">计算机基础</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/基础知识/">基础知识</a>, <a href="/tags/计算机网络/">计算机网络</a>, <a href="/tags/总结/">总结</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/25/计算机基础/201603/IP地址的分类/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/"><span>单工、半双工和全双工微总结</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-24T16:00:00.000Z">
+          2016-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>简单总结下这三个名词。<br>现在有A和B。</p>
+<h1 id="单工"><a href="#单工" class="headerlink" title="单工"></a>单工</h1><p>A能发送消息给B，B只能接受A的消息，B不能给A发消息。</p>
+<h1 id="半双工"><a href="#半双工" class="headerlink" title="半双工"></a>半双工</h1><p>A能发送消息给B，B也能发送消息给A，但不能同时进行，当A在发送消息时，B只能接受，反之一样。</p>
+<h1 id="全双工"><a href="#全双工" class="headerlink" title="全双工"></a>全双工</h1><p>A能发送消息给B，B也能发送消息给A，两者能同时进行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/计算机基础/">计算机基础</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/基础知识/">基础知识</a>, <a href="/tags/计算机网络/">计算机网络</a>, <a href="/tags/总结/">总结</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/22/Android/201603/ Android四大组件之一——Activity/"><span>Android四大组件之一——Activity</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/22/Android/201603/ Android四大组件之一——Activity/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-21T16:00:00.000Z">
+          2016-03-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <blockquote>
+<p>Activity是Android的四大组件之一，这里将梳理一下有关Activity的东西</p>
+</blockquote>
+<h2 id="Activity的四种状态"><a href="#Activity的四种状态" class="headerlink" title="Activity的四种状态"></a>Activity的四种状态</h2><p><strong>Active状态：</strong>在这种状态的Activity，必须是在栈顶的，此时它是可视的，并且可以获取焦点和用户的输入，Android系统将会保证在这种状态的Activity有充分的资源，当资源不足时就会试图杀死其它Activity来提供足够的资源，当激活另一个Activity后，当前Active状态的Activity将会进入Paused状态。<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Android/">Android</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/Android-加载模式/">Android - 加载模式</a>, <a href="/tags/Activity/">Activity</a>, <a href="/tags/启动模式/">启动模式</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/22/Android/201603/ Android四大组件之一——Activity/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/16/Java/201603/JVM简单个人总结（一）/"><span>JVM简单个人总结（一）</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/16/Java/201603/JVM简单个人总结（一）/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-15T16:00:00.000Z">
+          2016-03-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>说明：这篇文章只是个人对JVM的初步探讨总结，很多概念来自网络，加入部分个人理解，也许个人理解的地方有误，也恳请看到的同学帮忙指出，关于JVM的具体知识可以阅读《深入理解Java虚拟机：JVM高级特性与最佳性能》这本书籍。<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Java/">Java</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/JVM/">JVM</a>, <a href="/tags/虚拟机/">虚拟机</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/16/Java/201603/JVM简单个人总结（一）/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/15/Java/201603/Java集合类总结/"><span>Java集合类总结</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/15/Java/201603/Java集合类总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-14T16:00:00.000Z">
+          2016-03-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <blockquote>
+<p>这篇文章是对java集合类的个人总结</p>
+</blockquote>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Java/">Java</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/集合/">集合</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/15/Java/201603/Java集合类总结/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/03/13/Android/201603/RxJava初步学习总结/"><span>RxJava初步学习总结</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/13/Android/201603/RxJava初步学习总结/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-12T16:00:00.000Z">
+          2016-03-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><strong> 我们常用的对按钮事件的监听就是观察者模式的一个例子，对于观察者模式，简单的说就是有一个观察者，有个可以被当做观察的对象，这之间通过注册（register）或者订阅（subscribe）的方式进行绑定，当被观察的对象发生改变时，观察者就根据对象的动作做出相应的响应。 </strong></p>
+<p>在OnClickListener事件中，Button作为被观察者，onClickListener作为观察者，通过setOnClickListener订阅，onClick就是被观察者有动作后做出的相应事件。<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Android/">Android</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/RxJava/">RxJava</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/03/13/Android/201603/RxJava初步学习总结/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post article">
+
+  
+  
+    <h3 class="article-title"><a href="/2016/01/30/Android/201601/Gson学习笔记/"><span>Gson学习笔记</span></a></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/30/Android/201601/Gson学习笔记/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-29T16:00:00.000Z">
+          2016-01-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Gson是什么"><a href="#Gson是什么" class="headerlink" title="Gson是什么"></a>Gson是什么</h2><p>要了解Gson是什么，恐怕得先说一下Json这个东西<br>（Json的背景知识就直接引用网络上的了<a href="http://www.open-open.com/lib/view/open1407376535942.html）。">http://www.open-open.com/lib/view/open1407376535942.html）。</a></p>
+<h3 id="什么是Json"><a href="#什么是Json" class="headerlink" title="什么是Json"></a>什么是Json</h3><p>JSON即JavaScript Object Natation, 它是一种轻量级的数据交换格式, 与XML一样, 是广泛被采用的客户端和服务端交互的解决方案.<br>
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Android/">Android</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/Android/">Android</a>, <a href="/tags/Gson/">Gson</a>, <a href="/tags/Json/">Json</a>, <a href="/tags/解析/">解析</a>
+
+
+          </span>
+        </div>
+        
+
+        <div class="article-meta pull-right">
+          <span>
+            <i class="icon-comments"></i>
+            <span>
+              <a href="http://KevinWu1993.github.io/2016/01/30/Android/201601/Gson学习笔记/#comment">评论</a>
+            </span>
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+
+<nav class="pagination">
+  
+  
+</nav>
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
+  <p class="meta">
+    </br>
+    
+    &copy; 2016 Kevin Wu
+    
+  </p>
+</div>
+</footer>
+    <!---->
+  </div>
+</div>
+</body>
+</html>

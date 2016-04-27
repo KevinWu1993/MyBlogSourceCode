@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Gson学习笔记 | Kevin Wu&#39;s Blog | 慢几步，深几度</title>
+  <meta name="author" content="Kevin Wu">
+  
+  <meta name="description" content="KevinWu的个人博客">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Gson学习笔记"/>
+  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding">
+  <h1 class="site-title">
+    <a href="/">Kevin Wu&#39;s Blog</a>
+  </h1>
+  <p class="site-description">慢几步，深几度</p>
+</div>
+<nav id="site-navigation" class="main-navigation" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/categories">分类</a></li>
+    
+      <li><a href="/about">我</a></li>
+    
+      <li><a href="/tags">标签</a></li>
+    
+      <li><a href="/link">链接</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>Gson学习笔记</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/01/30/Android/201601/Gson学习笔记/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-01-29T16:00:00.000Z">
+          2016-01-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="Gson是什么"><a href="#Gson是什么" class="headerlink" title="Gson是什么"></a>Gson是什么</h2><p>要了解Gson是什么，恐怕得先说一下Json这个东西<br>（Json的背景知识就直接引用网络上的了<a href="http://www.open-open.com/lib/view/open1407376535942.html）。" target="_blank" rel="external">http://www.open-open.com/lib/view/open1407376535942.html）。</a></p>
+<h3 id="什么是Json"><a href="#什么是Json" class="headerlink" title="什么是Json"></a>什么是Json</h3><p>JSON即JavaScript Object Natation, 它是一种轻量级的数据交换格式, 与XML一样, 是广泛被采用的客户端和服务端交互的解决方案.<br><a id="more"></a></p>
+<h3 id="Json对象"><a href="#Json对象" class="headerlink" title="Json对象"></a>Json对象</h3><p>JSON中对象(Object)以”{“开始, 以”}”结束. 对象中的每一个item都是一个key-value对, 表现为”key:value”的形式, key-value对之间使用逗号分隔. 如:{“name”:”coolxing”, “age”=24, “male”:true, “address”:{“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}}. JSON对象的key只能是string类型的, 而value可以是string, number, false, true, null, Object对象甚至是array数组, 也就是说可以存在嵌套的情况.</p>
+<h3 id="Json数组"><a href="#Json数组" class="headerlink" title="Json数组"></a>Json数组</h3><p>JSON数组(array)以”[“开始, 以”]”结束, 数组中的每一个元素可以是string, number, false, true, null, Object对象甚至是array数组, 数组间的元素使用逗号分隔. 如[“coolxing”, 24, {“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}].</p>
+<p>好了Json的基本背景介绍完了，先看看一个天气Api返回的Json对象吧（截取部分）。<br>完整的json返回数据示例地址：<a href="https://github.com/KevinWu1993/YTWeatherPro/blob/dev/doc/%E5%AE%8C%E6%95%B4json%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE.md" target="_blank" rel="external">https://github.com/KevinWu1993/YTWeatherPro/blob/dev/doc/%E5%AE%8C%E6%95%B4json%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE.md</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;reason&quot;: &quot;查询成功&quot;,</span><br><span class="line">    &quot;result&quot;: &#123;</span><br><span class="line">        &quot;data&quot;: &#123;</span><br><span class="line">            &quot;realtime&quot;: &#123;</span><br><span class="line">                &quot;city_code&quot;: &quot;101210701&quot;,</span><br><span class="line">                &quot;city_name&quot;: &quot;温州&quot;,     /*城市*/</span><br><span class="line">                &quot;date&quot;: &quot;2014-10-15&quot;,  /*日期*/</span><br><span class="line">                &quot;time&quot;: &quot;09:00:00&quot;,     /*更新时间*/</span><br><span class="line">                &quot;week&quot;: 3,</span><br><span class="line">                &quot;moon&quot;: &quot;九月廿二&quot;,</span><br><span class="line">                &quot;dataUptime&quot;: 1413337811,</span><br><span class="line">                &quot;weather&quot;: &#123;    /*当前实况天气*/</span><br><span class="line">                    &quot;temperature&quot;: &quot;19&quot;,     /*温度*/</span><br><span class="line">                    &quot;humidity&quot;: &quot;54&quot;,     /*湿度*/</span><br><span class="line">                    &quot;info&quot;: &quot;雾&quot;,</span><br><span class="line">                    &quot;img&quot;: &quot;18&quot;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;wind&quot;: &#123;</span><br><span class="line">                    &quot;direct&quot;: &quot;北风&quot;,</span><br><span class="line">                    &quot;power&quot;: &quot;1级&quot;,</span><br><span class="line">                    &quot;offset&quot;: null,</span><br><span class="line">                    &quot;windspeed&quot;: null</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;life&quot;: &#123;     /*生活指数*/</span><br><span class="line">                &quot;date&quot;: &quot;2014-10-15&quot;,</span><br><span class="line">                &quot;info&quot;: &#123;</span><br><span class="line">                    &quot;chuanyi&quot;: [     /*穿衣指数*/</span><br><span class="line">                        &quot;较舒适&quot;,</span><br><span class="line">                        &quot;建议着薄外套或牛仔衫裤等服装。年老体弱者宜着夹克衫、薄毛衣等。昼夜温差较大，注意适当增减衣服。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;ganmao&quot;: [    /*感冒指数*/</span><br><span class="line">                        &quot;较易发&quot;,</span><br><span class="line">                        &quot;昼夜温差较大，较易发生感冒，请适当增减衣服。体质较弱的朋友请注意防护。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;kongtiao&quot;: [   /*空调指数*/</span><br><span class="line">                        &quot;较少开启&quot;,</span><br><span class="line">                        &quot;您将感到很舒适，一般不需要开启空调。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;wuran&quot;: [     /*污染指数*/</span><br><span class="line">                        &quot;良&quot;,</span><br><span class="line">                        &quot;气象条件有利于空气污染物稀释、扩散和清除，可在室外正常活动。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;xiche&quot;: [     /*洗车指数*/</span><br><span class="line">                        &quot;较适宜&quot;,</span><br><span class="line">                        &quot;较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;yundong&quot;: [     /*运动指数*/</span><br><span class="line">                        &quot;较适宜&quot;,</span><br><span class="line">                        &quot;天气较好，但风力较大，推荐您进行室内运动，若在户外运动请注意防风。&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;ziwaixian&quot;: [   /*紫外线*/</span><br><span class="line">                        &quot;中等&quot;,</span><br><span class="line">                        &quot;属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。&quot;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">         ............</span><br></pre></td></tr></table></figure>
+<p>上面是天气Api返回的json对象，之前开发中是用org.json工具进行解析的，可能我对那个工具也没有参悟得很透彻，我感觉我用的是最笨的方法，下面给出一小段之前写的解析代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取得result根</span></span><br><span class="line"> JSONObject jsonresult = <span class="keyword">new</span> JSONObject(value);</span><br><span class="line"> String resultSTR = jsonresult.getString(<span class="string">"result"</span>);</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//取得DATA根</span></span><br><span class="line"> JSONObject jsonDATA = <span class="keyword">new</span> JSONObject(resultSTR);</span><br><span class="line"> String dataSTR = jsonDATA.getString(<span class="string">"data"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//取得realtime根</span></span><br><span class="line"> JSONObject jsonRT = <span class="keyword">new</span> JSONObject(dataSTR);</span><br><span class="line"> String rtSTR = jsonRT.getString(<span class="string">"realtime"</span>);</span><br><span class="line">JSONObject jsonRealTime = <span class="keyword">new</span> JSONObject(rtSTR);<span class="comment">//这个是realtime的json对象</span></span><br><span class="line">String city = jsonRealTime.getString(<span class="string">"city_name"</span>); <span class="comment">//取得城市名称</span></span><br><span class="line"> String updatetime = jsonRealTime.getString(<span class="string">"date"</span>) + <span class="string">" "</span> + jsonRealTime.getString(<span class="string">"time"</span>);<span class="comment">//获得更新时间，即为返回的数据的日期加更新具体时间</span></span><br></pre></td></tr></table></figure></p>
+<p>好了！废话说了这么多，该谈谈Gson了，回到那个问题，Gson是什么？<br>其实也就是一个工具。</p>
+<hr>
+<h2 id="使用Gson前准备工作"><a href="#使用Gson前准备工作" class="headerlink" title="使用Gson前准备工作"></a>使用Gson前准备工作</h2><p>要使用它，我们要先下载它的依赖包，可以直接去github开源项目地址下载：<a href="https://github.com/google/gson" target="_blank" rel="external">https://github.com/google/gson</a><br>我也搬运过来了，直接去下载也可以：<a href="http://download.csdn.net/detail/kevinwu93/9422464" target="_blank" rel="external">http://download.csdn.net/detail/kevinwu93/9422464</a></p>
+<p>下载后，我们需要在工程项目中依赖它这个jar包，以Android Studio为例，可以放到module中的libs目录下，如下图所示：<br><img src="http://img.blog.csdn.net/20160130141817334" alt="这里写图片描述"><br>接下来还需要在gradle文件中添加依赖语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile files(&apos;libs/gson-2.5.jar&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>这样，我们就导入这个工具了，接下来就可以使用了。</p>
+<hr>
+<h2 id="正式使用Gson"><a href="#正式使用Gson" class="headerlink" title="正式使用Gson"></a>正式使用Gson</h2><p>这里主要讨论使用Gson的fromJson()方法解析Json字符串，获取相应的数据，至于toJson()方法，以后应该还会写篇文章。</p>
+<p>先来看看fromJson()这个方法：<br>fromJson()这个方法的用法如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Gson().fromJson(Json_string,<span class="class"><span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure></p>
+<p>参数需要json字符串和一个实体，所以下面先来针对以上天气的返回数据创建一个实体：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String reason;</span><br><span class="line">    <span class="keyword">public</span> ResultEntity result;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> error_code;<span class="comment">//错误码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个天气实体中我分成了三部分，第一部分为一个字符串，对应返回的json数据的reason字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;reason&quot;: &quot;查询成功&quot;</span><br></pre></td></tr></table></figure></p>
+<p>最后的error_code对应json数据中的error_code字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;error_code&quot;: 0</span><br></pre></td></tr></table></figure></p>
+<p>下面说一下中中间的public ResultEntity result;这个实体类型<br>因为返回的result字段的数据比较复杂，所以继续细分出来，先看看ResultEntityEntity这个类的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> DataEntity data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为result中又包含了一个data字段，所有我再分了一层，再来看看DataEntity部分的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> RealtimeEntity realtime;</span><br><span class="line">    <span class="keyword">public</span> LifeEntity life;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;AdayWeatherEntity&gt; weather=<span class="keyword">new</span> ArrayList&lt;AdayWeatherEntity&gt;();</span><br><span class="line">    <span class="keyword">public</span> Pm25Entity pm25;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> date;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> isForeign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>分析这段代码前，先看一下返回的json的数据的结构（建议参照完整json数据返回内容）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&quot;realtime&quot;: &#123;</span><br><span class="line">      &quot;city_code&quot;: &quot;101210701&quot;,</span><br><span class="line">      &quot;city_name&quot;: &quot;温州&quot;,     /*城市*/</span><br><span class="line">      &quot;date&quot;: &quot;2014-10-15&quot;,  /*日期*/</span><br><span class="line">      &quot;time&quot;: &quot;09:00:00&quot;,     /*更新时间*/</span><br><span class="line">       ............................省略</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;life&quot;: &#123;     /*生活指数*/</span><br><span class="line">      &quot;date&quot;: &quot;2014-10-15&quot;,</span><br><span class="line">      &quot;info&quot;: &#123;</span><br><span class="line">          &quot;chuanyi&quot;: [     /*穿衣指数*/</span><br><span class="line">              &quot;较舒适&quot;,</span><br><span class="line">              &quot;建议着薄外套或牛仔衫裤等服装。年老体弱者宜着夹克衫、薄毛衣等。昼夜温差较大，注意适当增减衣服。&quot;</span><br><span class="line">          ],</span><br><span class="line">         ............................省略</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;weather&quot;: [   /*未来几天天气预报*/</span><br><span class="line">      &#123;</span><br><span class="line">          &quot;date&quot;: &quot;2014-10-15&quot;,</span><br><span class="line">          &quot;info&quot;: &#123;</span><br><span class="line">              &quot;day&quot;: [     /*白天天气*/</span><br><span class="line">     ............................省略</span><br><span class="line">  ],</span><br><span class="line">  &quot;pm25&quot;: &#123;    /*PM2.5*/</span><br><span class="line">      &quot;key&quot;: &quot;Wenzhou&quot;,</span><br><span class="line">      &quot;show_desc&quot;: 0,</span><br><span class="line">      &quot;pm25&quot;: &#123;</span><br><span class="line">          &quot;curPm&quot;: &quot;97&quot;,</span><br><span class="line">          &quot;pm25&quot;: &quot;72&quot;,</span><br><span class="line">          &quot;pm10&quot;: &quot;97&quot;,</span><br><span class="line">          &quot;level&quot;: 2,</span><br><span class="line">          &quot;quality&quot;: &quot;良&quot;,</span><br><span class="line">          &quot;des&quot;: &quot;可以接受的，除极少数对某种污染物特别敏感的人以外，对公众健康没有危害。&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;dateTime&quot;: &quot;2014年10月15日09时&quot;,</span><br><span class="line">      &quot;cityName&quot;: &quot;温州&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;date&quot;: null,</span><br><span class="line">  &quot;isForeign&quot;: 0</span><br></pre></td></tr></table></figure></p>
+<p>可以看到这里有几大字段，分别为：</p>
+<ul>
+<li>realtime</li>
+<li>life</li>
+<li>weather</li>
+<li>pm25</li>
+<li>date</li>
+<li>isForeign</li>
+</ul>
+<p>对于date和isForeign这两个字段来说，单一数据，可以直接用对应的数据类型做实体，解析很简单。<br>对应realtime等类型的数据，结构相对来说还是比较复杂的，这里再单独出来进行解析，就用realtime做例子，其它的有需要可以参考github上项目的完整代码，这里不详细说明。<br>先来看看RealtimeEntity这个类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealtimeEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String city_code;<span class="comment">//城市代码</span></span><br><span class="line">    <span class="keyword">public</span> String city_name;<span class="comment">//城市名称</span></span><br><span class="line">    <span class="keyword">public</span> String date;<span class="comment">//日期</span></span><br><span class="line">    <span class="keyword">public</span> String time;<span class="comment">//更新时间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> week;<span class="comment">//星期</span></span><br><span class="line">    <span class="keyword">public</span> String moon;<span class="comment">//农历、</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> dataUptime;<span class="comment">//更新时间戳</span></span><br><span class="line">    <span class="keyword">public</span> RealTimeWeatherEntity weather;<span class="comment">//实时天气实体</span></span><br><span class="line">    <span class="keyword">public</span> RealtimeWindEntity wind;<span class="comment">//风速风力信息实体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于单一数据没嵌套的直接解析，对于还有嵌套的，继续细分，接下来看看RealTimeWeatherEntity和RealtimeWindEntity这两个类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealTimeWeatherEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String tempertrue;<span class="comment">//实时温度</span></span><br><span class="line">    <span class="keyword">public</span> String humidity;<span class="comment">//湿度</span></span><br><span class="line">    <span class="keyword">public</span> String info;<span class="comment">//天气信息</span></span><br><span class="line">    <span class="keyword">public</span> String img;<span class="comment">//天气对应图片</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealtimeWindEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String direct;<span class="comment">//风向</span></span><br><span class="line">    <span class="keyword">public</span> String power;<span class="comment">//风力</span></span><br><span class="line">    <span class="keyword">public</span> String offset;<span class="comment">//风向偏移量</span></span><br><span class="line">    <span class="keyword">public</span> String windspeed;<span class="comment">//风速</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个类都只是对数据进行定义，相当于把json中的数据一一对应地描述出来，这样进行了多层细分后，realtime这个字段返回的数据就每个都有了对应的变量来描述，其他的也同样道理，在对所有的数据进行实体定义后，就可以调用Gson方法进行解析了，解析部分的代码如下（我把测试的json数据放在个txt文件里面了）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    *测试gson实体</span><br><span class="line">    *<span class="doctag">@author</span> KevinWu</span><br><span class="line">    *create at 2016/1/29 22:15</span><br><span class="line">    */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testEntity</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String jsonStr=importStr();<span class="comment">//导入要测试的数据</span></span><br><span class="line">        System.out.println(jsonStr);</span><br><span class="line">        Gson gson=<span class="keyword">new</span> Gson();</span><br><span class="line">        WeatherEntity w=gson.fromJson(jsonStr,WeatherEntity.class);</span><br><span class="line">        System.out.println(w.result.data.pm25.pm25.pm10);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">importStr</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String str=<span class="string">""</span>;</span><br><span class="line">        File myFile=<span class="keyword">new</span> File(<span class="string">"./json_test.txt"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileReader myFileReader=<span class="keyword">new</span> FileReader(myFile);</span><br><span class="line">            BufferedReader myBufferedReader=<span class="keyword">new</span> BufferedReader(myFileReader);</span><br><span class="line">            String temp;</span><br><span class="line">            <span class="keyword">while</span>((temp=myBufferedReader.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                str=str+temp;</span><br><span class="line">            &#125;</span><br><span class="line">            myBufferedReader.close();</span><br><span class="line">            myFileReader.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>就这样。</p>
+<p>Github项目地址：<a href="https://github.com/KevinWu1993/YTWeatherPro" target="_blank" rel="external">https://github.com/KevinWu1993/YTWeatherPro</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          <span class="post-categories">
+            <i class="icon-categories"></i>
+            
+  
+
+  <a href="/categories/Android/">Android</a>
+
+
+          </span>
+          <span class="post-tags">
+            <i class="icon-tags"></i>
+            
+  
+
+  <a href="/tags/Java/">Java</a>, <a href="/tags/Android/">Android</a>, <a href="/tags/Gson/">Gson</a>, <a href="/tags/Json/">Json</a>, <a href="/tags/解析/">解析</a>
+
+
+          </span>
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+<div id="comment">
+<!--
+最近访客
+<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+-->
+<!-- 多说评论框 start -->
+ <div class="ds-thread" data-thread-key="/
+2016/01/30/Android/201601/Gson学习笔记/" data-title="Gson学习笔记" 
+data-url="http://KevinWu1993.github.io/2016/01/30/Android/201601/Gson学习笔记/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"kevinwu1993"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
+  <p class="meta">
+    </br>
+    
+    &copy; 2016 Kevin Wu
+    
+  </p>
+</div>
+</footer>
+    <!---->
+  </div>
+</div>
+</body>
+</html>
