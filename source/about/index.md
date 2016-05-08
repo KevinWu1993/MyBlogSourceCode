@@ -2,9 +2,9 @@
 title: 关于我
 date: 2016-01-01
 ---
-<img src="mail.png" width="16px" height="16px" style="margin: 7px auto;"/> **E-mail: ** [wqd1993@qq.com](mailto:wqd1993@qq.com)
-<img src="github.png" width="16px" height="16px" style="margin: 7px auto;"/>  **Github: ** https://github.com/KevinWu1993
-<img src="weibo.png" width="16px" height="16px" style="margin: 7px auto;"/> **Weibo: ** http://weibo.com/505055373
+**E-mail: ** [wqd1993@qq.com](mailto:wqd1993@qq.com)
+**Github: ** https://github.com/KevinWu1993
+**Weibo: ** http://weibo.com/505055373
 
 ---
 

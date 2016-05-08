@@ -1,90 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Gson学习笔记 | Kevin Wu&#39;s Blog | 慢几步，深几度</title>
-  <meta name="author" content="Kevin Wu">
-  
-  <meta name="description" content="KevinWu的个人博客">
-  
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="Gson学习笔记"/>
-  <meta property="og:site_name" content="Kevin Wu&#39;s Blog"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Kevin Wu&#39;s Blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <script type="text/javascript" src="/js/script.js"></script>
-</head>
-
-
-<body>
-<div id="page" class="site">
-  <div id="primary" class="content-area">
-
-    <header id="header" class="inner"><div class="site-branding">
-  <h1 class="site-title">
-    <a href="/">Kevin Wu&#39;s Blog</a>
-  </h1>
-  <p class="site-description">慢几步，深几度</p>
-</div>
-<nav id="site-navigation" class="main-navigation" role="navigation">
-  <ul>
-    
-      <li><a href="/">主页</a></li>
-    
-      <li><a href="/archives">归档</a></li>
-    
-      <li><a href="/categories">分类</a></li>
-    
-      <li><a href="/about">我</a></li>
-    
-      <li><a href="/tags">标签</a></li>
-    
-      <li><a href="/link">链接</a></li>
-    
-      <li><a href="/atom.xml">订阅</a></li>
-    
-  </ul>
-</nav></header>
-
-    <article id="content" class="site-content">
-      <main id="main" class="site-main posts-loop" role="main">
-        <article class="post article">
-
-  
-  
-    <h3 class="article-title"><span>Gson学习笔记</span></h3>
-  
-
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/01/30/Android/201601/Gson学习笔记/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-01-29T16:00:00.000Z">
-          2016-01-30
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h2 id="Gson是什么"><a href="#Gson是什么" class="headerlink" title="Gson是什么"></a>Gson是什么</h2><p>要了解Gson是什么，恐怕得先说一下Json这个东西<br>（Json的背景知识就直接引用网络上的了<a href="http://www.open-open.com/lib/view/open1407376535942.html）。" target="_blank" rel="external">http://www.open-open.com/lib/view/open1407376535942.html）。</a></p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="KevinWu的个人博客"><title>Gson学习笔记 | KevinWu.CN</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/3.0.3/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Gson学习笔记</h1><a id="logo" href="/.">KevinWu.CN</a><p class="description">慢几步，深几度</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Gson学习笔记</h1><div class="post-meta">Jan 30, 2016<span> | </span><span class="category"><a href="/categories/Android/">Android</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2016/01/30/Android/201601/Gson学习笔记/" href="/2016/01/30/Android/201601/Gson学习笔记/#comments" class="ds-thread-count"></a><div class="post-content"><h2 id="Gson是什么"><a href="#Gson是什么" class="headerlink" title="Gson是什么"></a>Gson是什么</h2><p>要了解Gson是什么，恐怕得先说一下Json这个东西<br>（Json的背景知识就直接引用网络上的了<a href="http://www.open-open.com/lib/view/open1407376535942.html）。" target="_blank" rel="external">http://www.open-open.com/lib/view/open1407376535942.html）。</a></p>
 <h3 id="什么是Json"><a href="#什么是Json" class="headerlink" title="什么是Json"></a>什么是Json</h3><p>JSON即JavaScript Object Natation, 它是一种轻量级的数据交换格式, 与XML一样, 是广泛被采用的客户端和服务端交互的解决方案.<br><a id="more"></a></p>
 <h3 id="Json对象"><a href="#Json对象" class="headerlink" title="Json对象"></a>Json对象</h3><p>JSON中对象(Object)以”{“开始, 以”}”结束. 对象中的每一个item都是一个key-value对, 表现为”key:value”的形式, key-value对之间使用逗号分隔. 如:{“name”:”coolxing”, “age”=24, “male”:true, “address”:{“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}}. JSON对象的key只能是string类型的, 而value可以是string, number, false, true, null, Object对象甚至是array数组, 也就是说可以存在嵌套的情况.</p>
 <h3 id="Json数组"><a href="#Json数组" class="headerlink" title="Json数组"></a>Json数组</h3><p>JSON数组(array)以”[“开始, 以”]”结束, 数组中的每一个元素可以是string, number, false, true, null, Object对象甚至是array数组, 数组间的元素使用逗号分隔. 如[“coolxing”, 24, {“street”:”huiLongGuan”, “city”:”beijing”, “country”:”china”}].</p>
@@ -120,78 +34,13 @@
 <p>这两个类都只是对数据进行定义，相当于把json中的数据一一对应地描述出来，这样进行了多层细分后，realtime这个字段返回的数据就每个都有了对应的变量来描述，其他的也同样道理，在对所有的数据进行实体定义后，就可以调用Gson方法进行解析了，解析部分的代码如下（我把测试的json数据放在个txt文件里面了）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">    *测试gson实体</span><br><span class="line">    *<span class="doctag">@author</span> KevinWu</span><br><span class="line">    *create at 2016/1/29 22:15</span><br><span class="line">    */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testEntity</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String jsonStr=importStr();<span class="comment">//导入要测试的数据</span></span><br><span class="line">        System.out.println(jsonStr);</span><br><span class="line">        Gson gson=<span class="keyword">new</span> Gson();</span><br><span class="line">        WeatherEntity w=gson.fromJson(jsonStr,WeatherEntity.class);</span><br><span class="line">        System.out.println(w.result.data.pm25.pm25.pm10);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">importStr</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String str=<span class="string">""</span>;</span><br><span class="line">        File myFile=<span class="keyword">new</span> File(<span class="string">"./json_test.txt"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileReader myFileReader=<span class="keyword">new</span> FileReader(myFile);</span><br><span class="line">            BufferedReader myBufferedReader=<span class="keyword">new</span> BufferedReader(myFileReader);</span><br><span class="line">            String temp;</span><br><span class="line">            <span class="keyword">while</span>((temp=myBufferedReader.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                str=str+temp;</span><br><span class="line">            &#125;</span><br><span class="line">            myBufferedReader.close();</span><br><span class="line">            myFileReader.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <p>就这样。</p>
 <p>Github项目地址：<a href="https://github.com/KevinWu1993/YTWeatherPro" target="_blank" rel="external">https://github.com/KevinWu1993/YTWeatherPro</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-        <div class="article-meta pull-left">
-          <span class="post-categories">
-            <i class="icon-categories"></i>
-            
-  
-
-  <a href="/categories/Android/">Android</a>
-
-
-          </span>
-          <span class="post-tags">
-            <i class="icon-tags"></i>
-            
-  
-
-  <a href="/tags/Java/">Java</a>, <a href="/tags/Android/">Android</a>, <a href="/tags/Gson/">Gson</a>, <a href="/tags/Json/">Json</a>, <a href="/tags/解析/">解析</a>
-
-
-          </span>
-        </div>
-        
-    </footer>
-  </div>
-</article>
-
-  
-<div id="comment">
-<!--
-最近访客
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
--->
-<!-- 多说评论框 start -->
- <div class="ds-thread" data-thread-key="/
-2016/01/30/Android/201601/Gson学习笔记/" data-title="Gson学习笔记" 
-data-url="http://KevinWu1993.github.io/2016/01/30/Android/201601/Gson学习笔记/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"kevinwu1993"};
-  (function() {
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://kevinwu.cn/2016/01/30/Android/201601/Gson学习笔记/" data-id="cinydc6wc0014o5tfvjb3t9xs" class="article-share-link">分享到</a><div class="tags"><a href="/tags/Java/">Java</a><a href="/tags/Android/">Android</a><a href="/tags/Gson/">Gson</a><a href="/tags/Json/">Json</a><a href="/tags/解析/">解析</a></div><div class="post-nav"><a href="/2016/03/13/Android/201603/RxJava初步学习总结/" class="pre">RxJava初步学习总结</a></div><div data-thread-key="2016/01/30/Android/201601/Gson学习笔记/" data-title="Gson学习笔记" data-url="http://kevinwu.cn/2016/01/30/Android/201601/Gson学习笔记/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2016/01/30/Android/201601/Gson学习笔记/" data-title="Gson学习笔记" data-url="http://kevinwu.cn/2016/01/30/Android/201601/Gson学习笔记/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/一本正经胡说八道/">一本正经胡说八道</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/在线刷题/">在线刷题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/师大-技术说明书/">师大+ 技术说明书</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/师大-辅助文档/">师大+ 辅助文档</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Activity/" style="font-size: 15px;">Activity</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/SharedPreferences/" style="font-size: 15px;">SharedPreferences</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/Jsoup/" style="font-size: 15px;">Jsoup</a> <a href="/tags/实战/" style="font-size: 15px;">实战</a> <a href="/tags/师大/" style="font-size: 15px;">师大+</a> <a href="/tags/Gson/" style="font-size: 15px;">Gson</a> <a href="/tags/Json/" style="font-size: 15px;">Json</a> <a href="/tags/解析/" style="font-size: 15px;">解析</a> <a href="/tags/RxJava/" style="font-size: 15px;">RxJava</a> <a href="/tags/加载模式/" style="font-size: 15px;">加载模式</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/启动模式/" style="font-size: 15px;">启动模式</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/虚拟机/" style="font-size: 15px;">虚拟机</a> <a href="/tags/集合/" style="font-size: 15px;">集合</a> <a href="/tags/引用/" style="font-size: 15px;">引用</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/查找/" style="font-size: 15px;">查找</a> <a href="/tags/二维数组/" style="font-size: 15px;">二维数组</a> <a href="/tags/基础知识/" style="font-size: 15px;">基础知识</a> <a href="/tags/计算机网络/" style="font-size: 15px;">计算机网络</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/08/师大+ 技术说明书/师大+技术说明书 第四期：Jsoup解析实战/">师大+技术说明书 第四期：Jsoup解析实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/08/师大+ 辅助文档/【师大+】反馈10问10答/">【师大+】反馈10问10答</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/07/师大+ 技术说明书/师大+技术说明书 第三期：与Jsoup不期而遇/">师大+技术说明书 第三期：与Jsoup不期而遇</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/师大+ 技术说明书/师大+技术说明书 第二期：让SPUtil变得更优雅/">师大+ 技术说明书 第二期：让SPUtil变得更优雅</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/师大+ 技术说明书/师大+ 技术说明书 第一期：建立一个万能的SharedPreferences工具/">师大+ 技术说明书 第一期：建立一个万能的SharedPreferences工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/Java/201605/Java的强软弱虚引用/">Java的强软弱虚引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/一本正经胡说八道/201605/肆月末伍月初/">肆月末伍月初</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/26/在线刷题/201603/二维数组中的查找——解题及多次优化思路分析/">二维数组中的查找——解题及多次优化思路分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/">单工、半双工和全双工微总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/计算机基础/201603/IP地址的分类/">IP地址的分类</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> 最近评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.jxnu.edu.cn/" title="江西师范大学" target="_blank">江西师范大学</a><ul></ul><a href="http://blog.csdn.net/mummyding/" title="MummyDing" target="_blank">MummyDing</a><ul></ul><a href="http://ddragonever.com/" title="Ddragon" target="_blank">Ddragon</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">KevinWu.CN.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'kevinwu1993'};
+(function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
     ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
     ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共JS代码 end -->
-
-</div>
-
-
-
-      </main>
-    </article>
-
-    <footer id="colophon" class="site-footer" role="contentinfo"><div class="site-info">
-  <p class="meta">
-    </br>
-    
-    &copy; 2016 Kevin Wu
-    
-  </p>
-</div>
-</footer>
-    <!---->
-  </div>
-</div>
-</body>
-</html>
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

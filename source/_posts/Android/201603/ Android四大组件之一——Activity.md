@@ -5,7 +5,7 @@ categories: Android
 tags: 
 	- Java 
 	- Android
-        - 加载模式
+	- 加载模式
 	- Activity
 	- 启动模式
 ---
