@@ -585,38 +585,6 @@
   </entry>
   
   <entry>
-    <title>单工、半双工和全双工微总结</title>
-    <link href="http://kevinwu.cn/2016/03/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/201603/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E5%92%8C%E5%85%A8%E5%8F%8C%E5%B7%A5%E5%BE%AE%E6%80%BB%E7%BB%93/"/>
-    <id>http://kevinwu.cn/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/</id>
-    <published>2016-03-24T16:00:00.000Z</published>
-    <updated>2016-03-26T12:05:45.000Z</updated>
-    
-    <content type="html">&lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
-&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
-&lt;h1 id=&quot;半双工&quot;&gt;&lt;a href=&quot;#半双工&quot; class=&quot;headerlink&quot; title=&quot;半双工&quot;&gt;&lt;/a&gt;半双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，但不能同时进行，当A在发送消息时，B只能接受，反之一样。&lt;/p&gt;
-&lt;h1 id=&quot;全双工&quot;&gt;&lt;a href=&quot;#全双工&quot; class=&quot;headerlink&quot; title=&quot;全双工&quot;&gt;&lt;/a&gt;全双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，两者能同时进行。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
-&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
-&lt;h1 id=
-    
-    </summary>
-    
-      <category term="计算机基础" scheme="http://kevinwu.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="总结" scheme="http://kevinwu.cn/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="基础知识" scheme="http://kevinwu.cn/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="计算机网络" scheme="http://kevinwu.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
     <title>IP地址的分类</title>
     <link href="http://kevinwu.cn/2016/03/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/201603/IP%E5%9C%B0%E5%9D%80%E7%9A%84%E5%88%86%E7%B1%BB/"/>
     <id>http://kevinwu.cn/2016/03/25/计算机基础/201603/IP地址的分类/</id>
@@ -645,6 +613,38 @@
     
       &lt;p&gt;根据不同特征的IP地址，对网络号所占的位数和主机号所占的位数进行分类，分为A、B、C、D、E五类地址。&lt;/p&gt;
 &lt;h1 id=&quot;A类地址&quot;&gt;&lt;a href=&quot;#A类地址&quot; class=&quot;headerlink&quot; title=&quot;A类地址&quot;&gt;&lt;/a&gt;A类地址&lt;/h1&gt;&lt;p&gt;A类地址的范围是1.0.0.0~126.255.255.255，高位以0开头，全球共有2^7-2个A类网络，每个A类网络有2^24-2个主机地址。127开头的地址保留为本地回环地址。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="计算机基础" scheme="http://kevinwu.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="总结" scheme="http://kevinwu.cn/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="基础知识" scheme="http://kevinwu.cn/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="计算机网络" scheme="http://kevinwu.cn/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单工、半双工和全双工微总结</title>
+    <link href="http://kevinwu.cn/2016/03/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/201603/%E5%8D%95%E5%B7%A5%E3%80%81%E5%8D%8A%E5%8F%8C%E5%B7%A5%E5%92%8C%E5%85%A8%E5%8F%8C%E5%B7%A5%E5%BE%AE%E6%80%BB%E7%BB%93/"/>
+    <id>http://kevinwu.cn/2016/03/25/计算机基础/201603/单工、半双工和全双工微总结/</id>
+    <published>2016-03-24T16:00:00.000Z</published>
+    <updated>2016-03-26T12:05:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
+&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
+&lt;h1 id=&quot;半双工&quot;&gt;&lt;a href=&quot;#半双工&quot; class=&quot;headerlink&quot; title=&quot;半双工&quot;&gt;&lt;/a&gt;半双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，但不能同时进行，当A在发送消息时，B只能接受，反之一样。&lt;/p&gt;
+&lt;h1 id=&quot;全双工&quot;&gt;&lt;a href=&quot;#全双工&quot; class=&quot;headerlink&quot; title=&quot;全双工&quot;&gt;&lt;/a&gt;全双工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B也能发送消息给A，两者能同时进行。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单总结下这三个名词。&lt;br&gt;现在有A和B。&lt;/p&gt;
+&lt;h1 id=&quot;单工&quot;&gt;&lt;a href=&quot;#单工&quot; class=&quot;headerlink&quot; title=&quot;单工&quot;&gt;&lt;/a&gt;单工&lt;/h1&gt;&lt;p&gt;A能发送消息给B，B只能接受A的消息，B不能给A发消息。&lt;/p&gt;
+&lt;h1 id=
     
     </summary>
     
