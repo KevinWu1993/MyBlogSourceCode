@@ -76,5 +76,5 @@ backup:
     type: git
     theme: maupassant
     repository:
-       github: https://github.com/KevinWu1993/MyBlogSourceCode.git,master
+       github: https://github.com/KevinWu1993/KevinWu1993.github.io.git,backup
 
