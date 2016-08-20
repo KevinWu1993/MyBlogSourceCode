@@ -72,3 +72,9 @@ deploy:
   repository: https://github.com/KevinWu1993/KevinWu1993.github.io.git
   branch: master
 
+backup:
+    type: git
+    theme: maupassant
+    repository:
+       github: https://github.com/KevinWu1993/MyBlogSourceCode.git,backup
+

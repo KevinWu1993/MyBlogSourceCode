@@ -13,6 +13,7 @@
     "hexo-generator-feed": "^1.1.0",
     "hexo-generator-index": "^0.2.0",
     "hexo-generator-tag": "^0.2.0",
+    "hexo-git-backup": "^0.1.2",
     "hexo-renderer-ejs": "^0.2.0",
     "hexo-renderer-jade": "^0.3.0",
     "hexo-renderer-marked": "^0.2.10",

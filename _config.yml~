@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Kevin Wu's Blog
+title: KevinWu.CN
 subtitle: 慢几步，深几度
 description: KevinWu的个人博客
 author: Kevin Wu
@@ -71,4 +71,9 @@ deploy:
   type: git
   repository: https://github.com/KevinWu1993/KevinWu1993.github.io.git
   branch: master
+
+backup:
+    type: git
+    repository:
+       github: https://github.com/KevinWu1993/MyBlogSourceCode.git,backup
 
